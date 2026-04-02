@@ -1,0 +1,32 @@
+# FILE_TREE.md exclusions
+# One pattern per line. Supports tree's -I glob syntax.
+# Lines starting with # are comments.
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+build
+.nx
+.turbo
+.cache
+out
+
+# Temp / generated
+tmp
+temp
+coverage
+*.log
+
+# Lock files & checksums
+*.lock
+*.sum
+
+# OS / tooling
+.DS_Store
+__pycache__
+*.pyc
+
+# Git
+.git

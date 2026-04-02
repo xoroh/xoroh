@@ -1,0 +1,10 @@
+#!/bin/sh
+# Git pre-commit dispatcher.
+# Runs all scripts in pre-commit.d/ in order.
+
+HOOKS_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+for script in "$HOOKS_DIR/pre-commit.d/"*.sh; do
+  [ -f "$script" ] || continue
+  sh "$script" || exit 1
+done

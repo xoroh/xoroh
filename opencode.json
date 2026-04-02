@@ -4,6 +4,11 @@
       "type": "local",
       "command": ["bunx", "nx", "mcp"],
       "enabled": true
+    },
+    "shadcn": {
+      "type": "local",
+      "command": ["bunx", "shadcn@latest", "mcp"],
+      "enabled": true
     }
   }
 }

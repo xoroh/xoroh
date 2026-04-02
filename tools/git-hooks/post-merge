@@ -1,0 +1,10 @@
+#!/bin/sh
+# Git post-merge dispatcher.
+# Runs all scripts in post-merge.d/ in order.
+
+HOOKS_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+for script in "$HOOKS_DIR/post-merge.d/"*.sh; do
+  [ -f "$script" ] || continue
+  sh "$script" || exit 1
+done
