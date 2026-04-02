@@ -42,3 +42,26 @@ Thumbs.db
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+
+# Environment and Secrets
+.env
+.env.project
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+.env*
+
+# Keys and Certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.crt
+*.sh.private
+
+# Node/NPM
+.npmrc
+.node_repl_history
