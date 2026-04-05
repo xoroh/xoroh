@@ -65,3 +65,7 @@ Thumbs.db
 # Node/NPM
 .npmrc
 .node_repl_history
+
+# File trees generated locally
+FILE_TREE.md
+**/FILE_TREE.md
