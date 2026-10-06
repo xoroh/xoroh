@@ -1,0 +1,16 @@
+{
+  "lockfileVersion": 2,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "xoroh",
+    },
+    "apps/site": {
+      "name": "site",
+      "version": "0.0.0",
+    },
+  },
+  "packages": {
+    "site": ["site@workspace:apps/site"],
+  }
+}
