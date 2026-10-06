@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Verify hub scaffold
+        run: |
+          test -f package.json
+          test -f apps/site/package.json
+          test -f apps/site/index.html
+          test -f apps/site/styles.css
+          test -f LICENSE
+          test -f README.md
