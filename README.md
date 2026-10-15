@@ -8,7 +8,7 @@ Open-source home of Xoroh. This repo also contains the source for its public sit
 
 ## License
 
-Apache License 2.0 — see `LICENSE`.
+MIT License — see `LICENSE`.
 
 ## Community
 

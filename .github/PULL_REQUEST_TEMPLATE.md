@@ -11,4 +11,4 @@
 - [ ] CI passes
 - [ ] Documentation updated when appropriate
 - [ ] No secrets or private data included
-- [ ] Changes preserve the Apache-2.0 license and notices
+- [ ] Changes preserve the MIT license and third-party notices

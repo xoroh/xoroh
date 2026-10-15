@@ -18,4 +18,4 @@ The current site is a starter scaffold and does not yet define test or build scr
 - Keep changes focused and describe their impact.
 - Update documentation when behavior or setup changes.
 - Do not include secrets, credentials, or private user data.
-- Preserve the repository's Apache-2.0 license and existing notices.
+- Preserve the repository's MIT license and any third-party notices.
