@@ -1,0 +1,89 @@
+{
+  "$schema": "./projects.schema.json",
+  "projects": [
+    {
+      "name": "xoroh",
+      "purpose": "Ecosystem foundation: shared standards, templates, workflows, agent guidance, and project index.",
+      "canonical_repo": "https://github.com/xoroh/xoroh",
+      "default_branch": "main",
+      "status": "active",
+      "maturity": "tbd-owner-input",
+      "maintainers": "tbd-owner-input",
+      "license": "MIT",
+      "runtimes": ["bun >=1.4.2"],
+      "platforms": ["web (static site)"],
+      "packages": [],
+      "docs_url": "https://github.com/xoroh/xoroh/tree/main/docs",
+      "support_url": "https://github.com/xoroh/xoroh/issues",
+      "release_policy": "No publishable artifacts; standards versioned via docs/standards/CHANGELOG.md.",
+      "security_reporting": "https://github.com/xoroh/xoroh/security/advisories/new",
+      "ecosystem_relations": ["sets standards for kern, axis, atlas"]
+    },
+    {
+      "name": "kern",
+      "purpose": "AI-native design-system platform with independently owned design-system implementations.",
+      "canonical_repo": "https://github.com/xoroh/kern",
+      "default_branch": "main",
+      "status": "active",
+      "maturity": "tbd-owner-input",
+      "maintainers": "tbd-owner-input",
+      "license": "MIT",
+      "runtimes": ["bun >=1.3.8", "node (per workflow matrix, if any)"],
+      "platforms": ["web (React)", "native (React Native / Expo)"],
+      "packages": [
+        { "name": "@xoroh/kern", "private": false, "published": false },
+        { "name": "@xoroh/kern-tokens", "private": false, "published": false },
+        { "name": "@xoroh/kern-native", "private": false, "published": false },
+        { "name": "@xoroh/kern-icons", "private": false, "published": false },
+        { "name": "@xoroh/kern-mcp", "private": false, "published": false },
+        { "name": "@xoroh/kern-contracts", "private": false, "published": false },
+        { "name": "@xoroh/kern-material-3", "private": false, "published": false },
+        { "name": "@xoroh/kern-cli", "private": true, "published": false },
+        { "name": "@xoroh/kern-primitives", "private": true, "published": false }
+      ],
+      "docs_url": "tbd-owner-input",
+      "support_url": "https://github.com/xoroh/kern/issues",
+      "release_policy": "Changesets per package; founder-gated publication (HOLD in effect).",
+      "security_reporting": "https://github.com/xoroh/kern/security/advisories/new",
+      "ecosystem_relations": ["consumes Xoroh standards (proposed)", "token interop with axis (proposed, DTCG)"]
+    },
+    {
+      "name": "axis",
+      "purpose": "Design-system-neutral native-mobile behavior and accessibility primitives.",
+      "canonical_repo": "https://github.com/xoroh/axis",
+      "default_branch": "development",
+      "status": "scaffold",
+      "maturity": "tbd-owner-input",
+      "maintainers": "tbd-owner-input",
+      "license": "MIT",
+      "runtimes": ["bun >=1.3.8"],
+      "platforms": ["tbd-owner-input (native stack undecided)"],
+      "packages": [
+        { "name": "@xoroh/axis-core", "private": true, "published": false }
+      ],
+      "docs_url": "tbd-owner-input",
+      "support_url": "https://github.com/xoroh/axis/issues",
+      "release_policy": "Manual-only; placeholder package must not publish (see docs/RELEASING.md in repo).",
+      "security_reporting": "https://github.com/xoroh/axis/security/advisories/new",
+      "ecosystem_relations": ["consumes Xoroh standards (proposed)", "token interop with kern (proposed, DTCG)"]
+    },
+    {
+      "name": "atlas",
+      "purpose": "Open-source documentation platform for the Xoroh ecosystem.",
+      "canonical_repo": "https://github.com/xoroh/atlas",
+      "default_branch": "development",
+      "status": "scaffold",
+      "maturity": "tbd-owner-input",
+      "maintainers": "tbd-owner-input",
+      "license": "MIT",
+      "runtimes": ["bun >=1.3.8"],
+      "platforms": ["web (docs framework undecided)"],
+      "packages": [],
+      "docs_url": "tbd-owner-input",
+      "support_url": "https://github.com/xoroh/atlas/issues",
+      "release_policy": "No publishable artifacts yet; manual release when defined.",
+      "security_reporting": "https://github.com/xoroh/atlas/security/advisories/new",
+      "ecosystem_relations": ["documents kern, axis, xoroh (proposed; readiness gates apply)"]
+    }
+  ]
+}

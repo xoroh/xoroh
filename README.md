@@ -5,6 +5,8 @@ Open-source home of Xoroh. This repo also contains the source for its public sit
 ## Structure
 
 - `apps/site/` — xoroh.org hub (landing + docs + project index)
+- `docs/` — ecosystem plan, shared standards, governance, ADRs
+- `projects.json` — machine-readable project index (validated by `bun run check:index`)
 
 ## License
 
