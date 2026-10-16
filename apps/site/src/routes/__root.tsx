@@ -163,8 +163,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 							</ul>
 						</nav>
 						<p>
-							MIT licensed. "Xoroh" is a provisional plain-text wordmark —
-							legal name and mark are not final.
+							MIT licensed. "Xoroh" is a provisional plain-text wordmark — legal
+							name and mark are not final.
 						</p>
 						<p>
 							Contact:{" "}

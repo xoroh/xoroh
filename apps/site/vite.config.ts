@@ -1,9 +1,9 @@
+import { copyFileSync, mkdirSync } from "node:fs";
+import { join } from "node:path";
 import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import { copyFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
 import { defineConfig } from "vite";
 
 // The hand-maintained search index lives at apps/site/search-index.json

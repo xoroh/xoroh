@@ -18,7 +18,10 @@ export const Route = createFileRoute("/contributing")({
 			{ property: "og:url", content: "https://xoroh.org/contributing" },
 			{ property: "og:type", content: "website" },
 			{ name: "twitter:card", content: "summary" },
-			{ name: "twitter:title", content: "Contributing — Xoroh open-source hub" },
+			{
+				name: "twitter:title",
+				content: "Contributing — Xoroh open-source hub",
+			},
 			{
 				name: "twitter:description",
 				content:

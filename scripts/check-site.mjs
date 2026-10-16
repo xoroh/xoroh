@@ -59,7 +59,9 @@ for (const [name, text] of Object.entries(sources)) {
 	check(!text.includes("®"), `${name}: no trademark symbols (O-8)`);
 }
 
-// Required home copy (VISION + O-1..O-8).
+// Required home copy (VISION + O-1..O-8). Contact and wordmark strings
+// live in the shell footer (__root.tsx, checked below), not in the home
+// page, so every route shares one footer landmark.
 for (const s of [
 	"One foundation. Every design system.",
 	"https://kern.xoroh.org",
@@ -69,15 +71,44 @@ for (const s of [
 	"Axis never depends on Kern",
 	"Target maturity at 0.1.0: Incubating",
 	"Target maturity at 0.1.0: Sandbox",
-	"conduct@xoroh.org",
 	"https://xoroh.com",
 	"xoroh.app",
 	"xoroh.dev",
-	"provisional plain-text wordmark",
 	'to="/news"',
 ]) {
 	check(index.includes(s), `index.tsx: missing required copy: ${s}`);
 }
+
+// Shell accessibility and shared footer (polish): skip link, labelled
+// primary nav, footer landmark with contact + wordmark, and the default
+// description/OG/Twitter shell metadata.
+const shell = norm(readFileSync(join(routes, "__root.tsx"), "utf8"));
+for (const s of [
+	'href="#main-content"',
+	"Skip to main content",
+	'aria-label="Primary"',
+	"<footer",
+	'aria-label="Footer"',
+	"conduct@xoroh.org",
+	"provisional plain-text wordmark",
+	'name: "description"',
+	'property: "og:site_name"',
+	'name: "twitter:card"',
+]) {
+	check(shell.includes(s), `__root.tsx: missing shell requirement: ${s}`);
+}
+
+// Skip-link target on every route (including the 404 component).
+for (const name of Object.values(routeFiles)) {
+	check(
+		(sources[name] ?? "").includes('id="main-content"'),
+		`${name}: missing skip-link target #main-content`,
+	);
+}
+check(
+	shell.includes('id="main-content"'),
+	"__root.tsx: 404 component missing skip-link target #main-content",
+);
 
 // New IA pages carry their decided copy.
 const requiredByRoute = {
@@ -110,14 +141,63 @@ for (const [name, snippets] of Object.entries(requiredByRoute)) {
 	}
 }
 
-// Every route declares its canonical link.
+// Every route declares its canonical link plus unique SEO metadata:
+// description, OG title/description/url, and Twitter card/title/description,
+// all on the https://xoroh.org apex.
+const titles = new Set();
 for (const [path, name] of Object.entries(routeFiles)) {
 	const canonical = `https://xoroh.org${path === "/" ? "/" : path}`;
+	const text = sources[name] ?? "";
 	check(
-		(sources[name] ?? "").includes(canonical),
+		text.includes(canonical),
 		`${name}: missing canonical link ${canonical}`,
 	);
+	for (const s of [
+		'name: "description"',
+		'property: "og:title"',
+		'property: "og:description"',
+		`property: "og:url", content: "${canonical}"`,
+		'name: "twitter:card"',
+		'name: "twitter:title"',
+		'name: "twitter:description"',
+	]) {
+		check(text.includes(s), `${name}: missing SEO metadata: ${s}`);
+	}
+	const title = /title: "([^"]+)"/.exec(text)?.[1];
+	check(
+		typeof title === "string" && title.length > 0,
+		`${name}: missing title`,
+	);
+	check(!titles.has(title), `${name}: duplicate title: ${title}`);
+	titles.add(title);
 }
+
+// robots.txt allows crawling and points at the apex sitemap.
+const robots = readFileSync(join(site, "public", "robots.txt"), "utf8");
+for (const s of [
+	"User-agent: *",
+	"Allow: /",
+	"Sitemap: https://xoroh.org/sitemap.xml",
+]) {
+	check(robots.includes(s), `robots.txt: missing required line: ${s}`);
+}
+
+// sitemap.xml lists every route on the apex canonical host.
+const sitemap = readFileSync(join(site, "public", "sitemap.xml"), "utf8");
+for (const path of Object.keys(routeFiles)) {
+	const loc = `<loc>https://xoroh.org${path === "/" ? "/" : path}</loc>`;
+	check(sitemap.includes(loc), `sitemap.xml: missing entry: ${loc}`);
+}
+
+// The /search-index.json links in docs.tsx and llms.txt must resolve in the
+// built site: the vite config copies the O-4 index into the client output.
+const viteConfig = readFileSync(join(site, "vite.config.ts"), "utf8");
+check(
+	viteConfig.includes("search-index.json") &&
+		viteConfig.includes("copyFileSync") &&
+		viteConfig.includes('"dist", "client"'),
+	"vite.config.ts: must copy search-index.json into the client build output",
+);
 
 // Project pages are driven by the registry: detail routes import the data
 // module, and the registry uses the decided kern-m3 name.

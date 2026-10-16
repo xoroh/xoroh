@@ -102,6 +102,86 @@ describe("search-index.json", () => {
 	});
 });
 
+describe("shell accessibility", () => {
+	test("skip link, labelled nav, and footer landmark", () => {
+		const shell = read(join(routes, "__root.tsx"));
+		for (const s of [
+			'href="#main-content"',
+			"Skip to main content",
+			'aria-label="Primary"',
+			"<footer",
+			'aria-label="Footer"',
+			'id="main-content"',
+		]) {
+			expect(shell.includes(s)).toBe(true);
+		}
+	});
+
+	test("every route renders the skip-link target", () => {
+		for (const file of Object.values(routeForPath)) {
+			expect(read(file).includes('id="main-content"')).toBe(true);
+		}
+	});
+});
+
+describe("route metadata", () => {
+	const canonicalFor = (path: string) =>
+		`https://xoroh.org${path === "/" ? "/" : path}`;
+
+	test("titles are unique and non-empty", () => {
+		const titles = new Set<string>();
+		for (const file of Object.values(routeForPath)) {
+			const title = /title: "([^"]+)"/.exec(read(file))?.[1] ?? "";
+			expect(title.length).toBeGreaterThan(0);
+			expect(titles.has(title)).toBe(false);
+			titles.add(title);
+		}
+	});
+
+	test("every route declares description, OG, Twitter, and canonical", () => {
+		for (const [path, file] of Object.entries(routeForPath)) {
+			const source = read(file);
+			const canonical = canonicalFor(path);
+			for (const s of [
+				'name: "description"',
+				'property: "og:title"',
+				'property: "og:description"',
+				`property: "og:url", content: "${canonical}"`,
+				'name: "twitter:card"',
+				'name: "twitter:title"',
+				'name: "twitter:description"',
+				canonical,
+			]) {
+				expect(source.includes(s)).toBe(true);
+			}
+		}
+	});
+});
+
+describe("sitemap and robots", () => {
+	test("robots.txt allows crawling and points at the apex sitemap", () => {
+		const robots = readFileSync(join(site, "public", "robots.txt"), "utf8");
+		for (const s of [
+			"User-agent: *",
+			"Allow: /",
+			"Sitemap: https://xoroh.org/sitemap.xml",
+		]) {
+			expect(robots.includes(s)).toBe(true);
+		}
+	});
+
+	test("sitemap.xml lists every route on the apex host", () => {
+		const sitemap = readFileSync(join(site, "public", "sitemap.xml"), "utf8");
+		for (const path of Object.keys(routeForPath)) {
+			expect(
+				sitemap.includes(
+					`<loc>https://xoroh.org${path === "/" ? "/" : path}</loc>`,
+				),
+			).toBe(true);
+		}
+	});
+});
+
 describe("hub copy rules", () => {
 	test("no stale links, compat names, product noun, or trademark symbols", () => {
 		for (const [, source] of allSources()) {

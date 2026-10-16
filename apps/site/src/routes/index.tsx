@@ -140,7 +140,6 @@ function Home() {
 					<li>xoroh.dev — on hold</li>
 				</ul>
 			</section>
-
 		</main>
 	);
 }
