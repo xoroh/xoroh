@@ -16,6 +16,9 @@ Follow in order; check off each with evidence (command + exit code or file).
       performed for new validation.
 - [ ] YAML parses; internal links resolve; `git diff --check` clean.
 - [ ] `ADOPTED_STANDARDS.md` written with all required fields.
+- [ ] Governing skill created with a "Xoroh standards audit" entry point
+      (pinned vs latest, finding classes, read-only default); procedures stay
+      in central skills, not copied.
 - [ ] Index entry proposed via PR when applicable (never edited live state
       without authorization).
 - [ ] Deviations recorded with justification; owner decisions left open.
