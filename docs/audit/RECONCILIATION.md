@@ -196,3 +196,25 @@ Issue register:
 
 No Git-state repairs were necessary; no restricted operations performed.
 Post-check: `check:index` and `check:fixture` green, worktree unchanged.
+
+## Cleanup execution appendix (2026-10-16 UTC)
+
+- Backup: `/tmp/opencode/xoroh-foundation-backup/` (43 files, HEAD archive +
+  uncommitted work, MANIFEST + CHECKSUMS) + `foundation-tracked.diff`;
+  validators re-ran green inside the backup. Secrets scan of all new content:
+  clean (only the literal string `GITHUB_TOKEN` in prose).
+- All 27 uncommitted files classified: intended ecosystem standards
+  implementation. No unrelated, generated, obsolete, or unknown material.
+- Commit `3dad533` (`feat(standards): add ecosystem foundation slice`)
+  created on `main`; worktree clean, `main` ahead of `origin/main` by 1.
+- Push to `main` **blocked by branch protection**: remote rejected with
+  `Required status check "main" is expected` (protection requires the CI
+  `main` job on the pushed commit; direct pushes cannot satisfy it).
+  No force-push or history rewrite attempted. Next authorized step is the
+  PR flow (branch → PR → green CI → merge), which requires merge
+  authorization not granted in this mission.
+- Dependabot branch `origin/dependabot/github_actions/actions/checkout-7.0.1`
+  (PR #3, checkout v4→v7.0.1 major bump) deliberately preserved: merging it
+  without the X-01 changelog review would violate the execution order, and
+  closing it would destroy the update prompt. Reported as the remaining
+  branch exception.
