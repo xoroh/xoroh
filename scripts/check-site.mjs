@@ -19,7 +19,7 @@ const norm = (s) => String(s).replace(/\s+/g, " ");
 
 const routeFiles = {
 	"/": "index.tsx",
-	"/projects": "projects.tsx",
+	"/projects": "projects.index.tsx",
 	"/projects/kern": "projects.kern.tsx",
 	"/projects/axis": "projects.axis.tsx",
 	"/maturity": "maturity.tsx",
@@ -112,7 +112,11 @@ check(
 
 // New IA pages carry their decided copy.
 const requiredByRoute = {
-	"projects.tsx": ["projects.json", '"/projects/kern"', '"/projects/axis"'],
+	"projects.index.tsx": [
+		"projects.json",
+		'"/projects/kern"',
+		'"/projects/axis"',
+	],
 	"projects.kern.tsx": [
 		"One foundation. Every design system.",
 		"Available at release",
@@ -201,7 +205,11 @@ check(
 
 // Project pages are driven by the registry: detail routes import the data
 // module, and the registry uses the decided kern-m3 name.
-for (const name of ["projects.tsx", "projects.kern.tsx", "projects.axis.tsx"]) {
+for (const name of [
+	"projects.index.tsx",
+	"projects.kern.tsx",
+	"projects.axis.tsx",
+]) {
 	check(
 		(sources[name] ?? "").includes("#/data/projects"),
 		`${name}: must render from the registry data module`,

@@ -7,7 +7,7 @@ import {
 	targetMaturity,
 } from "#/data/projects";
 
-export const Route = createFileRoute("/projects")({
+export const Route = createFileRoute("/projects/")({
 	head: () => ({
 		meta: [
 			{ title: "Projects — Xoroh open-source hub" },

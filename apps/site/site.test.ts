@@ -17,7 +17,7 @@ function read(file: string): string {
 // TanStack Start routes backing each search-index URL path.
 const routeForPath: Record<string, string> = {
 	"/": join(routes, "index.tsx"),
-	"/projects": join(routes, "projects.tsx"),
+	"/projects": join(routes, "projects.index.tsx"),
 	"/projects/kern": join(routes, "projects.kern.tsx"),
 	"/projects/axis": join(routes, "projects.axis.tsx"),
 	"/maturity": join(routes, "maturity.tsx"),
