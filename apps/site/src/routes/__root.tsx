@@ -38,9 +38,13 @@ function NotFound() {
 		<main>
 			<h1>No such page</h1>
 			<p>
-				This hub keeps a small page set on purpose. Start at the{" "}
-				<Link to="/">hub home</Link> or read the{" "}
-				<Link to="/news">news stream</Link>.
+				This hub keeps a small page set on purpose: <Link to="/">home</Link>,{" "}
+				<Link to="/projects">projects</Link>,{" "}
+				<Link to="/maturity">maturity</Link>,{" "}
+				<Link to="/governance">governance</Link>,{" "}
+				<Link to="/contributing">contributing</Link>,{" "}
+				<Link to="/security">security</Link>, <Link to="/brand">brand</Link>,{" "}
+				<Link to="/docs">docs</Link>, and <Link to="/news">news</Link>.
 			</p>
 		</main>
 	);
@@ -53,6 +57,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
+				<header>
+					<nav aria-label="Hub">
+						<Link to="/">Xoroh</Link> · <Link to="/projects">Projects</Link> ·{" "}
+						<Link to="/maturity">Maturity</Link> ·{" "}
+						<Link to="/governance">Governance</Link> ·{" "}
+						<Link to="/contributing">Contributing</Link> ·{" "}
+						<Link to="/security">Security</Link> ·{" "}
+						<Link to="/brand">Brand</Link> · <Link to="/docs">Docs</Link> ·{" "}
+						<Link to="/news">News</Link>
+					</nav>
+				</header>
 				{children}
 				<Scripts />
 			</body>

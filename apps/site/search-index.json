@@ -17,6 +17,77 @@
 			"keywords": ["axis", "native", "primitives", "base ui", "sandbox"]
 		},
 		{
+			"title": "Hub pages",
+			"url": "/#hub-pages",
+			"keywords": ["governance", "contributing", "security", "brand", "docs"]
+		},
+		{
+			"title": "Projects",
+			"url": "/projects",
+			"keywords": ["projects", "directory", "registry", "kern", "axis"]
+		},
+		{
+			"title": "Kern project",
+			"url": "/projects/kern",
+			"keywords": [
+				"kern",
+				"design system",
+				"material design 3",
+				"incubating",
+				"install"
+			]
+		},
+		{
+			"title": "Kern packages",
+			"url": "/projects/kern#kern-packages",
+			"keywords": ["kern", "packages", "kern-m3", "tokens"]
+		},
+		{
+			"title": "Axis project",
+			"url": "/projects/axis",
+			"keywords": ["axis", "native", "primitives", "sandbox", "install"]
+		},
+		{
+			"title": "Axis packages",
+			"url": "/projects/axis#axis-packages",
+			"keywords": ["axis", "packages"]
+		},
+		{
+			"title": "Maturity",
+			"url": "/maturity",
+			"keywords": ["maturity", "sandbox", "incubating", "graduated", "archived"]
+		},
+		{
+			"title": "Maturity ladder",
+			"url": "/maturity#ladder",
+			"keywords": ["ladder", "sandbox", "incubating", "graduated", "archived"]
+		},
+		{
+			"title": "Governance",
+			"url": "/governance",
+			"keywords": ["governance", "adr", "owner", "standards", "conduct"]
+		},
+		{
+			"title": "Contributing",
+			"url": "/contributing",
+			"keywords": ["contributing", "bun", "pull request", "checks"]
+		},
+		{
+			"title": "Security",
+			"url": "/security",
+			"keywords": ["security", "vulnerability", "advisory", "reporting"]
+		},
+		{
+			"title": "Brand",
+			"url": "/brand",
+			"keywords": ["brand", "wordmark", "naming", "domains"]
+		},
+		{
+			"title": "Docs",
+			"url": "/docs",
+			"keywords": ["docs", "kern.xoroh.org", "search index", "llms.txt"]
+		},
+		{
 			"title": "News stream",
 			"url": "/news",
 			"keywords": ["news", "releases", "governance", "security"]

@@ -38,6 +38,17 @@ jobs:
           test -f apps/site/src/routes/__root.tsx
           test -f apps/site/src/routes/index.tsx
           test -f apps/site/src/routes/news.tsx
+          test -f apps/site/src/routes/projects.tsx
+          test -f apps/site/src/routes/projects.kern.tsx
+          test -f apps/site/src/routes/projects.axis.tsx
+          test -f apps/site/src/routes/maturity.tsx
+          test -f apps/site/src/routes/governance.tsx
+          test -f apps/site/src/routes/contributing.tsx
+          test -f apps/site/src/routes/security.tsx
+          test -f apps/site/src/routes/brand.tsx
+          test -f apps/site/src/routes/docs.tsx
+          test -f apps/site/src/data/projects.ts
+          test -f apps/site/public/llms.txt
           test -f LICENSE
           test -f README.md
 

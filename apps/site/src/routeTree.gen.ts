@@ -10,11 +10,45 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BrandRouteImport } from './routes/brand'
+import { Route as ContributingRouteImport } from './routes/contributing'
+import { Route as DocsRouteImport } from './routes/docs'
+import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as MaturityRouteImport } from './routes/maturity'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as SecurityRouteImport } from './routes/security'
+import { Route as ProjectsAxisRouteImport } from './routes/projects.axis'
+import { Route as ProjectsKernRouteImport } from './routes/projects.kern'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandRoute = BrandRouteImport.update({
+  id: '/brand',
+  path: '/brand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContributingRoute = ContributingRouteImport.update({
+  id: '/contributing',
+  path: '/contributing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaturityRoute = MaturityRouteImport.update({
+  id: '/maturity',
+  path: '/maturity',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -22,31 +56,119 @@ const NewsRoute = NewsRouteImport.update({
   path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsAxisRoute = ProjectsAxisRouteImport.update({
+  id: '/axis',
+  path: '/axis',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const ProjectsKernRoute = ProjectsKernRouteImport.update({
+  id: '/kern',
+  path: '/kern',
+  getParentRoute: () => ProjectsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/brand': typeof BrandRoute
+  '/contributing': typeof ContributingRoute
+  '/docs': typeof DocsRoute
+  '/governance': typeof GovernanceRoute
+  '/maturity': typeof MaturityRoute
   '/news': typeof NewsRoute
+  '/projects': typeof ProjectsRouteWithChildren
+  '/security': typeof SecurityRoute
+  '/projects/axis': typeof ProjectsAxisRoute
+  '/projects/kern': typeof ProjectsKernRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/brand': typeof BrandRoute
+  '/contributing': typeof ContributingRoute
+  '/docs': typeof DocsRoute
+  '/governance': typeof GovernanceRoute
+  '/maturity': typeof MaturityRoute
   '/news': typeof NewsRoute
+  '/projects': typeof ProjectsRouteWithChildren
+  '/security': typeof SecurityRoute
+  '/projects/axis': typeof ProjectsAxisRoute
+  '/projects/kern': typeof ProjectsKernRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/brand': typeof BrandRoute
+  '/contributing': typeof ContributingRoute
+  '/docs': typeof DocsRoute
+  '/governance': typeof GovernanceRoute
+  '/maturity': typeof MaturityRoute
   '/news': typeof NewsRoute
+  '/projects': typeof ProjectsRouteWithChildren
+  '/security': typeof SecurityRoute
+  '/projects/axis': typeof ProjectsAxisRoute
+  '/projects/kern': typeof ProjectsKernRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/news'
+  fullPaths:
+    | '/'
+    | '/brand'
+    | '/contributing'
+    | '/docs'
+    | '/governance'
+    | '/maturity'
+    | '/news'
+    | '/projects'
+    | '/security'
+    | '/projects/axis'
+    | '/projects/kern'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/news'
-  id: '__root__' | '/' | '/news'
+  to:
+    | '/'
+    | '/brand'
+    | '/contributing'
+    | '/docs'
+    | '/governance'
+    | '/maturity'
+    | '/news'
+    | '/projects'
+    | '/security'
+    | '/projects/axis'
+    | '/projects/kern'
+  id:
+    | '__root__'
+    | '/'
+    | '/brand'
+    | '/contributing'
+    | '/docs'
+    | '/governance'
+    | '/maturity'
+    | '/news'
+    | '/projects'
+    | '/security'
+    | '/projects/axis'
+    | '/projects/kern'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BrandRoute: typeof BrandRoute
+  ContributingRoute: typeof ContributingRoute
+  DocsRoute: typeof DocsRoute
+  GovernanceRoute: typeof GovernanceRoute
+  MaturityRoute: typeof MaturityRoute
   NewsRoute: typeof NewsRoute
+  ProjectsRoute: typeof ProjectsRouteWithChildren
+  SecurityRoute: typeof SecurityRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +180,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/brand': {
+      id: '/brand'
+      path: '/brand'
+      fullPath: '/brand'
+      preLoaderRoute: typeof BrandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contributing': {
+      id: '/contributing'
+      path: '/contributing'
+      fullPath: '/contributing'
+      preLoaderRoute: typeof ContributingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maturity': {
+      id: '/maturity'
+      path: '/maturity'
+      fullPath: '/maturity'
+      preLoaderRoute: typeof MaturityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news': {
       id: '/news'
       path: '/news'
@@ -65,12 +222,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/axis': {
+      id: '/projects/axis'
+      path: '/axis'
+      fullPath: '/projects/axis'
+      preLoaderRoute: typeof ProjectsAxisRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/projects/kern': {
+      id: '/projects/kern'
+      path: '/kern'
+      fullPath: '/projects/kern'
+      preLoaderRoute: typeof ProjectsKernRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
   }
 }
 
+interface ProjectsRouteChildren {
+  ProjectsAxisRoute: typeof ProjectsAxisRoute
+  ProjectsKernRoute: typeof ProjectsKernRoute
+}
+
+const ProjectsRouteChildren: ProjectsRouteChildren = {
+  ProjectsAxisRoute: ProjectsAxisRoute,
+  ProjectsKernRoute: ProjectsKernRoute,
+}
+
+const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
+  ProjectsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BrandRoute: BrandRoute,
+  ContributingRoute: ContributingRoute,
+  DocsRoute: DocsRoute,
+  GovernanceRoute: GovernanceRoute,
+  MaturityRoute: MaturityRoute,
   NewsRoute: NewsRoute,
+  ProjectsRoute: ProjectsRouteWithChildren,
+  SecurityRoute: SecurityRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

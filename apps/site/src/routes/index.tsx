@@ -20,6 +20,12 @@ function Home() {
 
 			<section id="projects">
 				<h2>Projects</h2>
+				<p>
+					<Link to="/projects">Browse the project directory</Link>, with full
+					pages for <Link to="/projects/kern">Kern</Link> and{" "}
+					<Link to="/projects/axis">Axis</Link>. Maturity badges are targets at
+					0.1.0 — see <Link to="/maturity">how maturity works</Link>.
+				</p>
 				<article id="kern">
 					<h3>Kern</h3>
 					<p>
@@ -73,6 +79,27 @@ function Home() {
 					One stream for releases, governance notes, and security notes.{" "}
 					<Link to="/news">Read the news stream</Link>.
 				</p>
+			</section>
+
+			<section id="hub-pages">
+				<h2>Hub pages</h2>
+				<ul>
+					<li>
+						<Link to="/governance">Governance</Link> — how decisions get made
+					</li>
+					<li>
+						<Link to="/contributing">Contributing</Link> — how to contribute
+					</li>
+					<li>
+						<Link to="/security">Security</Link> — how to report a vulnerability
+					</li>
+					<li>
+						<Link to="/brand">Brand</Link> — provisional wordmark and naming
+					</li>
+					<li>
+						<Link to="/docs">Docs</Link> — where the docs live
+					</li>
+				</ul>
 			</section>
 
 			<section id="domains">
