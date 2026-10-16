@@ -1,4 +1,5 @@
-// Site data tests: search-index.json shape and anchor resolution.
+// Site data tests: search-index.json shape and anchor resolution,
+// registry-driven project pages, copy rules, and llms.txt coverage.
 // Run: bun test
 import { describe, expect, test } from "bun:test";
 import { existsSync, readFileSync } from "node:fs";
@@ -7,14 +8,35 @@ import { join } from "node:path";
 const site = join(import.meta.dir);
 const routes = join(site, "src", "routes");
 
+// Normalize whitespace: Biome reflows JSX text, so copy assertions match
+// on words rather than line breaks.
+function read(file: string): string {
+	return readFileSync(file, "utf8").replace(/\s+/g, " ");
+}
+
 // TanStack Start routes backing each search-index URL path.
 const routeForPath: Record<string, string> = {
 	"/": join(routes, "index.tsx"),
+	"/projects": join(routes, "projects.tsx"),
+	"/projects/kern": join(routes, "projects.kern.tsx"),
+	"/projects/axis": join(routes, "projects.axis.tsx"),
+	"/maturity": join(routes, "maturity.tsx"),
+	"/governance": join(routes, "governance.tsx"),
+	"/contributing": join(routes, "contributing.tsx"),
+	"/security": join(routes, "security.tsx"),
+	"/brand": join(routes, "brand.tsx"),
+	"/docs": join(routes, "docs.tsx"),
 	"/news": join(routes, "news.tsx"),
 };
 
 function readIndex() {
 	return JSON.parse(readFileSync(join(site, "search-index.json"), "utf8"));
+}
+
+function readRegistry() {
+	return JSON.parse(
+		readFileSync(join(site, "..", "..", "projects.json"), "utf8"),
+	);
 }
 
 function sourceFor(url: string): {
@@ -24,6 +46,13 @@ function sourceFor(url: string): {
 	const [path, fragment] = String(url).split("#");
 	const file = routeForPath[path];
 	return { file, fragment };
+}
+
+function allSources(): [string, string][] {
+	return Object.values(routeForPath).map((file) => [
+		file.split("/").pop() ?? file,
+		read(file),
+	]);
 }
 
 describe("search-index.json", () => {
@@ -55,29 +84,106 @@ describe("search-index.json", () => {
 			expect(file).toBeDefined();
 			expect(existsSync(file)).toBe(true);
 			if (fragment) {
-				const source = readFileSync(file, "utf8");
+				const source = read(file);
 				expect(source.includes(`id="${fragment}"`)).toBe(true);
 			}
+		}
+	});
+
+	test("every route path is indexed", () => {
+		const paths = new Set(
+			readIndex().entries.map(
+				(e: { url: string }) => String(e.url).split("#")[0],
+			),
+		);
+		for (const path of Object.keys(routeForPath)) {
+			expect(paths.has(path)).toBe(true);
 		}
 	});
 });
 
 describe("hub copy rules", () => {
-	test("no stale links or product noun", () => {
-		for (const name of ["index.tsx", "news.tsx"]) {
-			const source = readFileSync(join(routes, name), "utf8");
+	test("no stale links, compat names, product noun, or trademark symbols", () => {
+		for (const [, source] of allSources()) {
 			expect(source.includes("ui.xoroh.org")).toBe(false);
-			expect(source.includes('href="/docs"')).toBe(false);
-			expect(source.includes('href="/projects"')).toBe(false);
 			expect(source.includes("Xoroh OSS")).toBe(false);
+			expect(source.includes("kern-material-3")).toBe(false);
+			expect(source.includes("™")).toBe(false);
+			expect(source.includes("®")).toBe(false);
 		}
 	});
 
 	test("install snippets carry availability marks", () => {
-		const source = readFileSync(join(routes, "index.tsx"), "utf8");
-		expect(source.includes("Available at release")).toBe(true);
-		expect(source.includes("@xoroh/kern-m3")).toBe(true);
-		expect(source.includes("kern-material-3")).toBe(false);
-		expect(source.includes("@xoroh/axis")).toBe(true);
+		for (const file of [
+			routeForPath["/projects/kern"],
+			routeForPath["/projects/axis"],
+		]) {
+			const source = read(file);
+			expect(source.includes("Available at release")).toBe(true);
+		}
+		const kern = read(routeForPath["/projects/kern"]);
+		expect(kern.includes("@xoroh/kern-m3")).toBe(true);
+		expect(kern.includes("kern-material-3")).toBe(false);
+		const axis = read(routeForPath["/projects/axis"]);
+		expect(axis.includes("@xoroh/axis")).toBe(true);
+		expect(axis.includes("Axis never depends on Kern")).toBe(true);
+	});
+
+	test("every route declares its canonical link", () => {
+		for (const [path, file] of Object.entries(routeForPath)) {
+			const source = read(file);
+			expect(source.includes(`https://xoroh.org${path}`)).toBe(true);
+		}
+	});
+});
+
+describe("registry-driven project pages", () => {
+	test("registry has kern and axis entries with packages", () => {
+		const registry = readRegistry();
+		for (const name of ["kern", "axis"]) {
+			const project = registry.projects.find(
+				(p: { name: string }) => p.name === name,
+			);
+			expect(project).toBeDefined();
+			expect(project.packages.length).toBeGreaterThan(0);
+		}
+	});
+
+	test("registry uses the decided kern-m3 name", () => {
+		const raw = readFileSync(join(site, "..", "..", "projects.json"), "utf8");
+		expect(raw.includes("@xoroh/kern-m3")).toBe(true);
+		expect(raw.includes("kern-material-3")).toBe(false);
+	});
+
+	test("project routes render from the registry data module", () => {
+		for (const file of [
+			routeForPath["/projects"],
+			routeForPath["/projects/kern"],
+			routeForPath["/projects/axis"],
+		]) {
+			expect(read(file).includes("#/data/projects")).toBe(true);
+		}
+	});
+
+	test("project pages iterate registry packages (no hardcoded lists)", () => {
+		for (const file of [
+			routeForPath["/projects/kern"],
+			routeForPath["/projects/axis"],
+		]) {
+			expect(read(file).includes("project.packages.map")).toBe(true);
+		}
+		const full = read(routeForPath["/projects"]);
+		expect(full.includes("projects.map")).toBe(true);
+	});
+});
+
+describe("llms.txt", () => {
+	test("maps the full IA and availability marks", () => {
+		const llms = read(join(site, "public", "llms.txt"));
+		for (const path of Object.keys(routeForPath).filter((p) => p !== "/")) {
+			expect(llms.includes(`https://xoroh.org${path}`)).toBe(true);
+		}
+		expect(llms.includes("projects.json")).toBe(true);
+		expect(llms.includes("Available at release (0.1.0)")).toBe(true);
 	});
 });

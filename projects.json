@@ -37,7 +37,7 @@
         { "name": "@xoroh/kern-icons", "private": false, "published": false },
         { "name": "@xoroh/kern-mcp", "private": false, "published": false },
         { "name": "@xoroh/kern-contracts", "private": false, "published": false },
-        { "name": "@xoroh/kern-material-3", "private": false, "published": false },
+        { "name": "@xoroh/kern-m3", "private": false, "published": false },
         { "name": "@xoroh/kern-cli", "private": true, "published": false },
         { "name": "@xoroh/kern-primitives", "private": true, "published": false }
       ],

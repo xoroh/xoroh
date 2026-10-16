@@ -1,17 +1,36 @@
 # Xoroh open-source hub
 
 > The open-source hub of Xoroh (xoroh.org). Commercial SaaS lives at
-> xoroh.com; this site covers community open source only.
+> xoroh.com; this site covers community open source only. Never call the hub
+> a product. The hub goes live only with Kern and Axis 0.1.0, never before;
+> every install snippet below is marked "Available at release (0.1.0)".
 
 ## Pages
 
-- [Hub home](/): projects (Kern, Axis), news pointer, domain table
-- [News](/news): one stream for releases, governance notes, and security notes
+- [Hub home](https://xoroh.org/): projects (Kern, Axis), news pointer, domain table
+- [Projects](https://xoroh.org/projects): directory driven by projects.json, plus the full registry
+- [Kern](https://xoroh.org/projects/kern): One foundation. Every design system. Material Design 3 first. Target maturity at 0.1.0: Incubating.
+- [Axis](https://xoroh.org/projects/axis): unstyled, accessible behavior primitives for native; Axis never depends on Kern. Target maturity at 0.1.0: Sandbox.
+- [Maturity](https://xoroh.org/maturity): CNCF-style ladder Sandbox -> Incubating -> Graduated, plus the Archived rule
+- [Governance](https://xoroh.org/governance): owners, ADR process, cadence, conduct@xoroh.org
+- [Contributing](https://xoroh.org/contributing): Bun >=1.4.2, checks, pull-request rules
+- [Security](https://xoroh.org/security): private advisory reporting, per-project channels
+- [Brand](https://xoroh.org/brand): provisional plain-text wordmark, naming rules, domain table
+- [Docs](https://xoroh.org/docs): product docs live with their projects; hub links out
+- [News](https://xoroh.org/news): one stream for releases, governance notes, and security notes; starts at launch, no backfill
 
 ## Projects
 
-- Kern — One foundation. Every design system. Docs: https://kern.xoroh.org
-- Axis — Unstyled, accessible behavior primitives for native. Docs: https://github.com/xoroh/axis/tree/development/docs
+- Kern — One foundation. Every design system. Docs: https://kern.xoroh.org — Repo: https://github.com/xoroh/kern — Install: `bun add @xoroh/kern @xoroh/kern-tokens @xoroh/kern-m3` (Available at release (0.1.0))
+- Axis — Design-system-neutral native-mobile behavior and accessibility primitives. Docs: https://github.com/xoroh/axis/tree/development/docs (no axis.xoroh.org in v1) — Repo: https://github.com/xoroh/axis — Install: `bun add @xoroh/axis` (Available at release (0.1.0); peers react>=18, react-native>=0.86 <0.89)
+- Registry source of truth: https://github.com/xoroh/xoroh/blob/main/projects.json
+
+## Docs and standards
+
+- Hub docs tree: https://github.com/xoroh/xoroh/tree/main/docs
+- Governance: https://github.com/xoroh/xoroh/tree/main/docs/governance.md
+- Contributing: https://github.com/xoroh/xoroh/blob/main/CONTRIBUTING.md
+- Security policy: https://github.com/xoroh/xoroh/blob/main/SECURITY.md
 
 ## Search
 
