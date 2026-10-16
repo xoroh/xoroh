@@ -53,6 +53,15 @@ jobs:
       - name: Validate project index
         run: bun run check:index
 
+      - name: Validate hub site
+        run: bun run check:site
+
+      - name: Test
+        run: bun test
+
+      - name: Lint
+        run: bun run lint
+
       - name: Validate consumer fixture
         run: bun run check:fixture
 

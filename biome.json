@@ -1,0 +1,15 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"formatter": { "enabled": true },
+	"linter": { "enabled": true },
+	"javascript": { "formatter": { "quoteStyle": "double" } },
+	"json": { "formatter": { "enabled": true } },
+	"files": {
+		"includes": [
+			"apps/site/site.test.ts",
+			"apps/site/search-index.json",
+			"apps/site/search-index.schema.json",
+			"scripts/check-site.mjs"
+		]
+	}
+}
