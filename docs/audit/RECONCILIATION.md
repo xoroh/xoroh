@@ -218,3 +218,23 @@ Post-check: `check:index` and `check:fixture` green, worktree unchanged.
   without the X-01 changelog review would violate the execution order, and
   closing it would destroy the update prompt. Reported as the remaining
   branch exception.
+
+## Integration appendix (2026-10-16 UTC)
+
+- PR #5 (`integrate/foundation-review` → `main`): commits `3dad533`
+  (foundation) + `b7978a9` (audit record). Hosted CI on the PR
+  (run 38832777068): `main` pass, `validate` pass under bun 1.4.2 (frozen
+  install + both validators) — real hosted evidence covering the local
+  toolchain gap. Merged as `d701d82`; post-merge CI (run 38832903562):
+  success. No required reviews (protection count 0); no bypasses used.
+- Dependabot PR #3 merged on merits as `1b2a38b` (supersedes the exception
+  above): SHA-pinned (policy preserved), v7.0.1 runs on `node24` (verified
+  from the action manifest), green CI on the PR (run 38833101896) and
+  post-merge `main` (run 38833181851, success). Both workflow jobs' pins
+  now consistent at v7.0.1. Branch deleted after merge.
+- Branch cleanup: local `integrate/foundation-review` deleted; remote
+  integration and dependabot branches deleted (`fetch --prune` confirms).
+- Backup `/tmp/opencode/xoroh-foundation-backup/` (43 files + checksums +
+  diff) verified with green validators; merged commits are now the record.
+- Local bun still 1.3.8 (environmental; hosted CI is the verification path).
+  Owner §21 decisions unchanged; no tags/releases created.
