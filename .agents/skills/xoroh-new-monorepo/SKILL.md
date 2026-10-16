@@ -12,8 +12,16 @@ standards; do not duplicate them here.
 
 From the canonical source (`https://github.com/xoroh/xoroh`), read in order:
 
-1. `AGENTS.md` — scope, prohibitions, reporting rules.
-2. `docs/standards/README.md` — structure and MUST/SHOULD/MAY labels.
+1. `AGENTS.md` — scope, prohibitions, reporting rules. New repositories get
+   the same minimal pattern: one-sentence description, mandatory pointer to
+   their governing skill, critical rules, reporting requirements.
+2. `.agents/skills/xoroh-repository/SKILL.md` — hub governance and skill
+   router. Each consumer repository gets its own small governing skill;
+   that skill must include a "Xoroh standards audit" entry point (pinned vs
+   latest baseline, finding classes, read-only default) modeled on the
+   `atlas` skill — never a full copy of central audit procedures.
+   never copy the hub skill verbatim as one.
+3. `docs/standards/README.md` — structure and MUST/SHOULD/MAY labels.
 3. `docs/standards/universal-baseline.md` — mandatory controls.
 4. `docs/standards/repository-profiles.md` — the profiles fitting the target.
 5. `docs/standards/versioning.md` + `docs/adr/` — versioning and decisions.
@@ -44,9 +52,14 @@ license reference.
 ## 4. Bootstrap or reconcile
 
 For a new repository: instantiate the scaffold, then add the project's
-toolchain, build/test commands, and CI jobs. For an existing repository:
-reconcile file by file against the baseline, keeping project-specific
-architecture intact. Shared requirements stay; project choices stay explicit.
+toolchain, build/test commands, and CI jobs. Classify every top-level
+directory per `docs/standards/repository-structure.md` (`apps/` runnable,
+`packages/` distributable, `libs/` internal shared) and introduce `libs/`
+only for a genuine internal shared-library need. For release guidance use the
+`oss-release` skill (procedure stops before publication). For an existing
+repository: reconcile file by file against the baseline, keeping
+project-specific architecture intact. Shared requirements stay; project
+choices stay explicit.
 
 ## 5. Handle gaps and deviations
 

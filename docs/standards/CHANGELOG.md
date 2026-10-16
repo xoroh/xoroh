@@ -5,7 +5,16 @@ and how consumers adopt it.
 
 ## Unreleased
 
+- On-demand standards-audit workflow: self-audit entry in
+  `xoroh-repository`, audit entry in the `atlas` skill (pinned vs latest,
+  finding classes, read-only default), governing-skill audit requirement in
+  onboarding skill/checklist/template guide, and continuous-improvement loop.
 - Initial universal baseline, repository-type profiles, and versioning draft.
+- Minimal root `AGENTS.md` pointing at the new `xoroh-repository`
+  governing skill; reusable `oss-release`, `repository-audit`,
+  `cross-repo-standardization`, `repository-structure`, and
+  `oss-maintenance` skills; repository-structure policy
+  (`apps/`/`packages/`/`libs/`); onboarding skill updated to cover them.
 - New-monorepo onboarding skill (`.agents/skills/xoroh-new-monorepo/`) with
   ordered checklist reference; discoverable via root `AGENTS.md` and the
   template adoption procedure (copy the skill directory; no auto-discovery

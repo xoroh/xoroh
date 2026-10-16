@@ -1,32 +1,10 @@
-# AGENTS.md — Xoroh ecosystem foundation
+# AGENTS.md — Xoroh OSS governance hub
 
-Bun monorepo (`bun@1.4.2`). Install: `bun install --frozen-lockfile`.
+This repository is the canonical home for Xoroh open-source standards,
+templates, and coordination. Skill: `.agents/skills/xoroh-repository/SKILL.md` (mandatory — read it before any task).
 
-## Scope
-
-Work in this repository only. Reference repos (`kern`, `axis`, `atlas`) are
-read-only context; the private product monorepo is strictly excluded — never
-access, inspect, or reference its contents.
-
-## Rules
-
-1. Do not publish, release, tag, deploy, merge, or change remote settings.
-2. Do not push to `main`; do not run destructive Git operations.
+1. Work in this repository only; other repos are read-only context unless a task explicitly authorizes changes. Never access the private product monorepo.
+2. Never publish, release, tag, deploy, merge, push to `main`, change remote settings, or run destructive Git operations without explicit authorization.
 3. No secrets in files, logs, or prompts. Never bypass failing checks.
-4. Human approval is required before any irreversible action.
-5. Verify against `docs/standards/`; project specifics stay in project repos.
-
-## Skills
-
-- Release preparation: `.agents/skills/release-prep/SKILL.md` (stops before
-  publication; never removes holds).
-- New-monorepo onboarding: `.agents/skills/xoroh-new-monorepo/SKILL.md`
-  (discover standards, inspect stack, adapt scaffold, validate, record
-  adoption; stops before releases, permission changes, cross-repo actions).
-- Standards changes: follow `docs/governance.md` and record decisions as ADRs
-  in `docs/adr/`.
-
-## Reporting
-
-Report commands run, validation results, failures, and anything you could not
-verify. State approval requirements explicitly; do not assume authorization.
+4. Read the relevant skill and procedure before any consequential action; human approval is required before irreversible steps.
+5. Preserve unrelated work; verify against `docs/standards/`; report commands, results, failures, and approval requirements.

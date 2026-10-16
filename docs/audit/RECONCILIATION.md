@@ -448,3 +448,35 @@ exception (X-03). Impact: a red-validation PR could merge; secret leaks rely
 on human review only. Proposed remediation: add `validate` to required
 checks; enable scanning or record a dated exception. Neither performed here
 (settings changes need owner authorization). Dependabot alerts: 0.
+
+## Governance skill system appendix (2026-10-16 UTC)
+
+Implemented in `xoroh/xoroh` (uncommitted): minimal root `AGENTS.md`
+(15 lines, mandatory pointer to `xoroh-repository` skill); new skills
+`xoroh-repository`, `oss-release`, `repository-audit`,
+`cross-repo-standardization`, `repository-structure`, `oss-maintenance`;
+`docs/standards/repository-structure.md` policy (`apps/`/`packages/`/`libs`
+meanings; `tests/`/`scripts/` not standardized); onboarding skill updated
+(AGENTS pattern, governing skill, structure rules, release guidance).
+Validation: all validators exit 0, frontmatter present on all new skills,
+internal references resolve (one prose ambiguity fixed), `diff --check`
+clean. No commits, settings, tags, or releases.
+
+## On-demand audit workflow appendix (2026-10-16 UTC)
+
+Extended existing skills instead of adding new ones: `xoroh-repository`
+gained a self-audit entry point + continuous-improvement loop; the `atlas`
+skill gained a standards-audit entry (pinned vs latest, finding classes,
+read-only default, standardization via `cross-repo-standardization`);
+onboarding skill, checklist, and template guide now require the governing
+skill to carry the audit entry (plus fixed duplicate step numbering).
+No new standalone skill, registry, or runtime dependency introduced.
+
+Proved end to end with a real on-demand audit of Atlas: pinned-baseline
+audit compliant (AGENTS + skill present, structure per policy, provenance
+accurate, validators green); latest-standards check correctly surfaced
+uncommitted central skill-system work as not-yet-adopted (no silent
+rewrite). Benign pre-existing warning noted: Starlight logs an i18n
+collection notice on build; single locale is intentional.
+Validation: all xoroh validators exit 0, Atlas tests/check/build green,
+`diff --check` clean, skill references resolve. Uncommitted, for review.
