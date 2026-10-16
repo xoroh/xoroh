@@ -2,7 +2,29 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/news")({
 	head: () => ({
-		meta: [{ title: "News — Xoroh open-source hub" }],
+		meta: [
+			{ title: "News — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"One stream for Xoroh releases, governance notes, and security notes. The stream starts at launch and is not backfilled.",
+			},
+			{ property: "og:title", content: "News — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"One stream for Xoroh releases, governance notes, and security notes. The stream starts at launch and is not backfilled.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/news" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "News — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"One stream for Xoroh releases, governance notes, and security notes. The stream starts at launch and is not backfilled.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/news" }],
 	}),
 	component: News,
@@ -10,7 +32,7 @@ export const Route = createFileRoute("/news")({
 
 function News() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>News</h1>
 			<p>
 				One stream for releases, governance notes, and security notes.{" "}

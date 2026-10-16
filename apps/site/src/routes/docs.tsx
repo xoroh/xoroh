@@ -2,7 +2,29 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/docs")({
 	head: () => ({
-		meta: [{ title: "Docs — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Docs — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"Where Xoroh docs live: Kern docs on kern.xoroh.org, Axis docs in the repo docs tree, the hub docs tree, search-index.json, and llms.txt.",
+			},
+			{ property: "og:title", content: "Docs — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"Where Xoroh docs live: Kern docs on kern.xoroh.org, Axis docs in the repo docs tree, the hub docs tree, search-index.json, and llms.txt.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/docs" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Docs — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"Where Xoroh docs live: Kern docs on kern.xoroh.org, Axis docs in the repo docs tree, the hub docs tree, search-index.json, and llms.txt.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/docs" }],
 	}),
 	component: Docs,
@@ -10,7 +32,7 @@ export const Route = createFileRoute("/docs")({
 
 function Docs() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Docs</h1>
 			<p>
 				Product docs stay with their projects. This hub links out and never

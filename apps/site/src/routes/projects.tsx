@@ -9,7 +9,29 @@ import {
 
 export const Route = createFileRoute("/projects")({
 	head: () => ({
-		meta: [{ title: "Projects — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Projects — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"Directory of Xoroh open-source projects, driven by the project registry: Kern and Axis detail pages plus the full registry.",
+			},
+			{ property: "og:title", content: "Projects — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"Directory of Xoroh open-source projects, driven by the project registry: Kern and Axis detail pages plus the full registry.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/projects" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Projects — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"Directory of Xoroh open-source projects, driven by the project registry: Kern and Axis detail pages plus the full registry.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/projects" }],
 	}),
 	component: Projects,
@@ -17,7 +39,7 @@ export const Route = createFileRoute("/projects")({
 
 function Projects() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Projects</h1>
 			<p>
 				The project directory of the open-source hub of Xoroh, driven by the{" "}

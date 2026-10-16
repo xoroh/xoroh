@@ -3,7 +3,29 @@ import { projectByName, targetMaturity } from "#/data/projects";
 
 export const Route = createFileRoute("/projects/axis")({
 	head: () => ({
-		meta: [{ title: "Axis — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Axis — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"Axis: unstyled, accessible behavior primitives for native. Install, packages, facts, and target maturity at 0.1.0. Axis never depends on Kern.",
+			},
+			{ property: "og:title", content: "Axis — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"Axis: unstyled, accessible behavior primitives for native. Install, packages, facts, and target maturity at 0.1.0. Axis never depends on Kern.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/projects/axis" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Axis — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"Axis: unstyled, accessible behavior primitives for native. Install, packages, facts, and target maturity at 0.1.0. Axis never depends on Kern.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/projects/axis" }],
 	}),
 	component: Axis,
@@ -12,7 +34,7 @@ export const Route = createFileRoute("/projects/axis")({
 function Axis() {
 	const project = projectByName("axis");
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Axis</h1>
 			<p>
 				Unstyled, accessible behavior primitives for native — the counterpart of
