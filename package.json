@@ -15,6 +15,8 @@
     "check:fixture": "bun fixtures/min-consumer/scripts/check-adoption.mjs",
     "check:scaffold-trial": "bun scripts/check-scaffold-trial.mjs",
     "check:site": "bun scripts/check-site.mjs",
+    "typecheck": "bun run --cwd apps/site typecheck",
+    "build:site": "bun run --cwd apps/site build",
     "test": "bun test",
     "lint": "biome check ."
   },

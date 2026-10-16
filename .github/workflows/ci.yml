@@ -30,8 +30,14 @@ jobs:
         run: |
           test -f package.json
           test -f apps/site/package.json
-          test -f apps/site/index.html
-          test -f apps/site/styles.css
+          test -f apps/site/vite.config.ts
+          test -f apps/site/tsr.config.json
+          test -f apps/site/tsconfig.json
+          test -f apps/site/wrangler.jsonc
+          test -f apps/site/src/router.tsx
+          test -f apps/site/src/routes/__root.tsx
+          test -f apps/site/src/routes/index.tsx
+          test -f apps/site/src/routes/news.tsx
           test -f LICENSE
           test -f README.md
 
@@ -61,6 +67,12 @@ jobs:
 
       - name: Lint
         run: bun run lint
+
+      - name: Typecheck hub site
+        run: bun run typecheck
+
+      - name: Build hub site
+        run: bun run build:site
 
       - name: Validate consumer fixture
         run: bun run check:fixture

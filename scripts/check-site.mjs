@@ -7,21 +7,30 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const site = join(root, "apps", "site");
+const routes = join(site, "src", "routes");
 const errors = [];
 const check = (cond, msg) => {
 	if (!cond) errors.push(msg);
 };
 
-const index = readFileSync(join(site, "index.html"), "utf8");
-const news = readFileSync(join(site, "news.html"), "utf8");
+// TanStack Start sources (O-1 port): routes carry the hub copy that the
+// static scaffold kept in index.html / news.html.
+const index = readFileSync(join(routes, "index.tsx"), "utf8");
+const news = readFileSync(join(routes, "news.tsx"), "utf8");
 const searchIndex = JSON.parse(
 	readFileSync(join(site, "search-index.json"), "utf8"),
 );
 
+// Route file backing each search-index URL path.
+const routeForPath = {
+	"/": join(routes, "index.tsx"),
+	"/news": join(routes, "news.tsx"),
+};
+
 // Banned: stale domain, dead routes, wrong product noun.
 for (const [name, text] of [
-	["index.html", index],
-	["news.html", news],
+	["index.tsx", index],
+	["news.tsx", news],
 ]) {
 	check(!text.includes("ui.xoroh.org"), `${name}: must not link ui.xoroh.org`);
 	check(!text.includes('href="/docs"'), `${name}: must not link dead /docs`);
@@ -51,14 +60,20 @@ for (const s of [
 	"xoroh.app",
 	"xoroh.dev",
 	"provisional plain-text wordmark",
-	"./news.html",
+	'to="/news"',
 ]) {
-	check(index.includes(s), `index.html: missing required copy: ${s}`);
+	check(index.includes(s), `index.tsx: missing required copy: ${s}`);
 }
-check(index.includes('rel="canonical"'), "index.html: missing canonical link");
-check(news.includes('rel="canonical"'), "news.html: missing canonical link");
+check(
+	index.includes("https://xoroh.org/"),
+	"index.tsx: missing canonical link",
+);
+check(
+	news.includes("https://xoroh.org/news"),
+	"news.tsx: missing canonical link",
+);
 
-// Search index: entries resolve to real pages and in-page anchors.
+// Search index: entries resolve to real routes and in-page anchors.
 check(
 	Array.isArray(searchIndex.entries) && searchIndex.entries.length > 0,
 	"search-index.json: needs at least one entry",
@@ -76,13 +91,16 @@ for (const entry of searchIndex.entries ?? []) {
 		Array.isArray(entry.keywords) && entry.keywords.length > 0,
 		`search-index.json: entry missing keywords (${entry.url})`,
 	);
-	const [file, fragment] = String(entry.url).split("#");
-	const page = join(site, file.replace(/^\.\//, ""));
-	check(existsSync(page), `search-index.json: page missing for ${entry.url}`);
-	if (fragment && existsSync(page)) {
-		const html = readFileSync(page, "utf8");
+	const [path, fragment] = String(entry.url).split("#");
+	const page = routeForPath[path];
+	check(
+		typeof page === "string" && existsSync(page),
+		`search-index.json: route missing for ${entry.url}`,
+	);
+	if (fragment && page && existsSync(page)) {
+		const source = readFileSync(page, "utf8");
 		check(
-			html.includes(`id="${fragment}"`),
+			source.includes(`id="${fragment}"`),
 			`search-index.json: anchor #${fragment} missing for ${entry.url}`,
 		);
 	}

@@ -9,7 +9,18 @@
 			"apps/site/site.test.ts",
 			"apps/site/search-index.json",
 			"apps/site/search-index.schema.json",
+			"apps/site/vite.config.ts",
+			"apps/site/src/**/*.ts",
+			"apps/site/src/**/*.tsx",
 			"scripts/check-site.mjs"
 		]
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["apps/site/src/routeTree.gen.ts"],
+			"formatter": { "enabled": false },
+			"linter": { "enabled": false },
+			"assist": { "enabled": false }
+		}
+	]
 }
