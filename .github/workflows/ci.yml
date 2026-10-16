@@ -55,3 +55,6 @@ jobs:
 
       - name: Validate consumer fixture
         run: bun run check:fixture
+
+      - name: Trial scaffold template
+        run: bun run check:scaffold-trial

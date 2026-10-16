@@ -330,3 +330,121 @@ Limitation: "passes CI in <15 min" proven for the template's checks locally
 and for structurally identical CI YAML parsing; a hosted run on a real new
 repository is impossible without creating one (unauthorized) — recorded, not
 assumed.
+
+## Post-X-08 reconciliation appendix (2026-10-16 UTC)
+
+Baseline re-verified: `main @ 570eb45` == `origin/main`, divergence 0/0,
+clean worktree, no stashes/worktrees/extra branches; HEAD CI (run 38836295631)
+success; protection requires check `main`, approvals 0; local bun 1.3.8
+(hosted CI 1.4.2 is the verification path).
+
+Milestone re-verification: X-06 (AGENTS.md merged; refusal trial evidenced
+with procedural limitation intact; no publishes/tags/releases made), X-07
+(fixture pin `53bd010` substantively current — zero changes to adopted
+sources `AGENTS.md`/root CI/`.agents/` since the pin; validators green),
+X-08 (19 template files + guide at canonical locations; trial + negative
+test + registry accommodation re-confirmed from record; hosted new-repo CI
+limitation stands as documented).
+
+Findings:
+
+- D6 (low, needs clarification, not applied): X-13 acceptance references
+  `docs/GOVERNANCE.md`, but governance lives at `docs/governance.md`.
+  Unclear whether a new file is intended or the path is stale. Left unchanged
+  pending clarification; X-13 is blocked on X-12 regardless.
+- No other discrepancies. Owner §21 list verified intact (10 items);
+  exclusion references intact; deferred items preserved; evidence inventory
+  untouched.
+
+Validation this mission: `check:index` exit 0, `check:fixture` exit 0,
+template self-check fails as designed on the unfilled template (27 markers
+named, exit 1), `git diff --check` clean. No implementation performed;
+no state changed except this appendix (uncommitted).
+
+## ADR-002 versioning decision appendix (2026-10-16 UTC)
+
+Owner decision recorded: SemVer 2.0.0 with `0.1.0` preview start and `1.0.0`
+stable milestone (ADR-002, accepted). Scoped to versioning/tag policy only:
+the distribution model in ADR-001 remains proposed (kept intact, cross-linked
+rather than rewritten; index updated). No unrelated decisions marked accepted.
+
+Changes: new `docs/adr/0002-standards-versioning.md`; ADR-001 related-decisions
+pointer; ADR index row; `docs/standards/versioning.md` header/scheme now cite
+accepted policy (no tags created); plan §9 (SemVer-ish → SemVer 2.0.0 +
+preview), §20 ADR-X-01 note, §21 item 3 (split decided/pending), X-13 path
+`docs/GOVERNANCE.md` → `docs/governance.md` (direct evidence: that is the
+existing file; resolves D6). Evidence inventory untouched. No tags, releases,
+publishes, settings, or other-repository changes.
+
+## Distribution baseline appendix (2026-10-16 UTC)
+
+Owner approvals recorded: ADR-001 accepted (copy-first; `workflow_call`,
+packages, bots, checksums deferred), ADR-002 already accepted (SemVer 2.0.0,
+preview, tag naming). Distribution mechanism and versioning kept in their
+respective ADRs with cross-links; no unrelated decisions marked accepted.
+
+Changes: ADR-001 rewritten as accepted copy-first record (context and
+alternatives preserved); ADR index; new `docs/standards/adoption.md`
+(8-field record format, update/rollback, diff discovery); `docs/releases.md`
+extended (release-notes convention, 30-day deprecation default with
+emergency exceptions, `0.1.0` readiness checklist — preparation only);
+fixture + template adoption records standardized to the 8 fields (fixture
+with real values, template with placeholders); plan §9/§20/§21/X-11 updated
+to decided-where-decided (tag creation, releases, adoption still gated);
+CHANGELOG entry (baseline bullet preserved); D6 resolved via direct evidence.
+Evidence inventory untouched. No tags, releases, publishes, settings, or
+other-repository changes. Validation: `check:index` and `check:fixture`
+green (updated records parse), `diff --check` clean, links rechecked.
+
+## Baseline implementation appendix (2026-10-16 UTC)
+
+Audit of this repository (`foundation` + Bun-monorepo/static-site stack)
+against the universal baseline: items 1–3, 5–6, 8–11 compliant with live
+evidence (least-privilege tokens, SHA pins, frozen lockfile + green HEAD CI,
+timeouts, gha-only Dependabot with zero package deps, contribution files,
+AGENTS.md prohibitions with no executable publish path, no secrets).
+Two gaps require owner action, not implementation: required checks cover only
+the `main` job (the `validate` job is unprotected — same defect class as
+Kern's; fixing it is a settings change), and secret scanning stays disabled
+without a recorded exception (X-03). Local frozen-install failure is
+environmental (bun 1.3.8 vs required >=1.4.2; CI uses 1.4.2).
+
+Implemented: `scripts/check-scaffold-trial.mjs` (isolated temp
+instantiation of the scaffold with test values, runs the scaffold
+self-check, always cleans up) wired as `check:scaffold-trial` and a CI
+`validate` step — closes the gap where the template was never exercised by
+automation. Note: the `xoroh-new-monorepo` skill referenced by the task does
+not exist (not in skills, not loadable, not in repo); the canonical
+`docs/templates/scaffold/` + standards were used instead. Left uncommitted
+for review; integration via the normal PR flow is the next step.
+
+## Onboarding skill appendix (2026-10-16 UTC)
+
+New skill `.agents/skills/xoroh-new-monorepo/` (Agent Skills frontmatter +
+8-step procedure + `references/onboarding-checklist.md`), discoverable via
+root `AGENTS.md` skills list and `docs/templates/README.md` adoption step
+(copy the directory; agents do not auto-discover remote skills). Note: the
+referenced `xoroh-new-monorepo` skill did not previously exist anywhere —
+this creates it; nothing was renamed or replaced.
+
+Clean-room agent trial (Python-stack `py-widget` in an isolated temp repo,
+genuinely walked step by step): discovery recorded SHA `570eb45` with dirty
+state noted; empty target inspected; scaffold + skill copied; placeholders
+filled with Python values; no deviations at scaffold stage; `check-scaffold`
+OK (20 files); adoption record written with real values; temp-registry copy
++ entry validated (`check:index` OK, 5 projects; real registry untouched;
+a non-`xoroh` canonical URL is correctly rejected by the schema).
+Temp artifacts removed; worktree verified clean.
+
+Defect found by the trial and fixed: the skill's own wording contained a
+literal placeholder marker, which would fail any consumer's self-check after
+copying the skill — reworded to describe the convention without the marker.
+Validator, template, and record behavior otherwise unchanged.
+
+Governance gaps re-verified 2026-10-16 (unchanged, still open): required
+checks remain [`main`] only (the `validate` job is unprotected — needs a
+settings change); secret scanning remains disabled with no recorded
+exception (X-03). Impact: a red-validation PR could merge; secret leaks rely
+on human review only. Proposed remediation: add `validate` to required
+checks; enable scanning or record a dated exception. Neither performed here
+(settings changes need owner authorization). Dependabot alerts: 0.

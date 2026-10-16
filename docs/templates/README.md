@@ -10,6 +10,10 @@ manager, or build system.
 ### Adopt
 
 1. Copy all files (including dotfiles) into the new repository root.
+2. Copy `.agents/skills/xoroh-new-monorepo/` into the new repository's
+   `.agents/skills/` so the onboarding guidance travels with the project
+   (or point the agent at the canonical path explicitly — agents do not
+   auto-discover remote skills).
 2. Fill every `__UPPER_SNAKE__` placeholder — project name, purpose,
    maintainers, contacts, toolchain, license holder. Leave none behind.
    (The scaffold check fails on any remaining marker.)

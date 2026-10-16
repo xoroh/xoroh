@@ -1,5 +1,7 @@
 # Adopted standards record — min-consumer fixture
 
+- Canonical source repository: `https://github.com/xoroh/xoroh`.
+- Standards tag: none yet (`STANDARDS-v*` tags do not exist; see ADR-002).
 - Pinned Xoroh revision: `53bd0106ef33345ae76efde42eb9f098355829fe`
   (`main` at time of re-pin, verified present via `git cat-file -t`.
   `STANDARDS-v*` tags do not exist yet — pins are commit SHAs until tag
@@ -25,3 +27,5 @@
     prohibitions and reporting rules retained verbatim in intent.
 - Rollback: re-copy the previous pin's versions of the files above, then
   re-run `bun run check:adoption` and full CI. Record the restored pin here.
+- Adoption date: 2026-10-16. Validation: `bun run check:fixture` from the
+  Xoroh root, exit 0 (plus hosted CI on the integrating PR).

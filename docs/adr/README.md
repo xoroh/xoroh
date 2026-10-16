@@ -16,4 +16,5 @@ the project repository; only ecosystem-wide decisions live here.
 
 | ADR | Title | Status |
 |-----|-------|--------|
-| 001 | Standards distribution model | proposed |
+| 001 | Standards distribution model | accepted 2026-10-16 |
+| 002 | Standards versioning policy | accepted 2026-10-16 |
