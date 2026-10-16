@@ -30,6 +30,10 @@ for (const [name, text] of [
 		`${name}: must not link dead /projects`,
 	);
 	check(!text.includes("Xoroh OSS"), `${name}: no product called "Xoroh OSS"`);
+	check(
+		!text.includes("kern-material-3"),
+		`${name}: renamed to kern-m3, no compat name (kern 010/020)`,
+	);
 }
 
 // Required: canonical copy, links, availability marks, brand table.
@@ -38,7 +42,6 @@ for (const s of [
 	"https://kern.xoroh.org",
 	"https://github.com/xoroh/axis",
 	"Available at release",
-	"@xoroh/kern-material-3",
 	"@xoroh/kern-m3",
 	"Axis never depends on Kern",
 	"Target maturity at 0.1.0: Incubating",

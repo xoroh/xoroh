@@ -60,7 +60,8 @@ describe("hub copy rules", () => {
 	test("install snippets carry availability marks", () => {
 		const html = readFileSync(join(site, "index.html"), "utf8");
 		expect(html.includes("Available at release")).toBe(true);
-		expect(html.includes("@xoroh/kern-material-3")).toBe(true);
+		expect(html.includes("@xoroh/kern-m3")).toBe(true);
+		expect(html.includes("kern-material-3")).toBe(false);
 		expect(html.includes("@xoroh/axis")).toBe(true);
 	});
 });
