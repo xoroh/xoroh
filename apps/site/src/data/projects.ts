@@ -56,7 +56,7 @@ export const targetMaturity: Record<string, string> = {
 export function docsLinkFor(project: RegistryProject): string {
 	if (project.name === "kern") return "https://kern.xoroh.org";
 	if (project.name === "axis")
-		return "https://github.com/xoroh/axis/tree/development/docs";
+		return "https://github.com/xoroh/axis/tree/main/docs";
 	return project.docs_url;
 }
 

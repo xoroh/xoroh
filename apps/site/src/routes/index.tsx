@@ -88,9 +88,7 @@ function Home() {
 					</p>
 					<p>
 						<a href="https://github.com/xoroh/axis">Axis repo</a> ·{" "}
-						<a href="https://github.com/xoroh/axis/tree/development/docs">
-							Axis docs
-						</a>
+						<a href="https://github.com/xoroh/axis/tree/main/docs">Axis docs</a>
 					</p>
 				</article>
 			</section>

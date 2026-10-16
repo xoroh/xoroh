@@ -49,7 +49,7 @@ function Docs() {
 					</li>
 					<li>
 						Axis docs live in the{" "}
-						<a href="https://github.com/xoroh/axis/tree/development/docs">
+						<a href="https://github.com/xoroh/axis/tree/main/docs">
 							axis repo docs tree
 						</a>{" "}
 						until Axis earns a site — see{" "}

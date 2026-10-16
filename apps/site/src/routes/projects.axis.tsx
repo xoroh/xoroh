@@ -81,7 +81,7 @@ function Axis() {
 					</li>
 					<li>
 						Docs: the{" "}
-						<a href="https://github.com/xoroh/axis/tree/development/docs">
+						<a href="https://github.com/xoroh/axis/tree/main/docs">
 							axis repo docs tree
 						</a>{" "}
 						— there is no axis.xoroh.org in v1.
