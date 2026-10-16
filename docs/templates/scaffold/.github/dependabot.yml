@@ -1,0 +1,9 @@
+# Only GitHub Actions are covered until the project adds its own lockfiles.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"

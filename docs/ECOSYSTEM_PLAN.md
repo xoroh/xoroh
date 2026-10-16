@@ -549,7 +549,7 @@ work in Phase 2 depends on them.
 |----|-----------|----------|---------|---------------------------|
 | X-06 | `AGENTS.md` core + prohibited-actions policy | `xoroh/AGENTS.md` | — (proceeds independently; X-02 remains the gate for releases only) | `test -f AGENTS.md` ✓ (merged); mock-publish refusal trial executed 2026-10-16 — refused, no authorization present, publish never invoked; see reconciliation log |
 | X-07 | Starter CI conventions + consumer fixture harness (v1); callable reusable workflows only after fixture validation | `xoroh/.github/workflows/*`, `xoroh/fixtures/*` | X-06 | Starter conventions documented; fixture run green; no `workflow_call` interface published before a real consumer validates it. Status 2026-10-16: implemented, merged via PR #5 (commit `d701d82`), hosted CI green; see `fixtures/min-consumer/` + `docs/audit/RECONCILIATION.md` |
-| X-08 | Repo-type profiles + templates | `xoroh/docs/standards/*`, `xoroh/template-*` or `docs/templates/*` | X-06 | New-repo trial from template passes CI in <15 min |
+| X-08 | Repo-type profiles + templates | `xoroh/docs/standards/*`, `docs/templates/scaffold/` | X-06 | New-repo trial from template passes its checks (hosted new-repo CI not possible without creating a repository — recorded limitation). Status: scaffold template + usage guide implemented; isolated trial passed (instantiation, validators, negative test, registry accommodation); see reconciliation log |
 | X-09 | `release-prep` skill v1 | `xoroh/.agents/skills/release-prep/` | X-06 | Dry-run on Kern produces manifest, stops pre-publish |
 | X-10 | Project index + metadata schema (public repos only; excluded private repo is not listed) | `xoroh/projects.json` (+ generated page later) | X-06 (built without templates; corrected 2026-10-16 — see reconciliation log) | `bun run check:index` validates; all 4 public projects listed, unknowns `tbd-owner-input` |
 | X-11 | Standards versioning + changelog | `xoroh/docs/standards/CHANGELOG.md`, `STANDARDS-v*` tags | X-07–X-10 | Tag + migration notes; consumer re-pin trial works |
@@ -630,7 +630,7 @@ npm pack --dry-run  # in package dir; inspect files, never publish
 | ADR-AT-01 | Atlas framework + content model | Undecided — Next/Fumadocs vs Astro/Starlight vs alternatives | Open, maintainer input |
 | ADR-P-01 | Private adoption mechanism, if ever authorized | Pinned sanitized copies + leak gate | Proposed as optional guidance only; any work needs separate authorization |
 
-ADR template and numbering live under `xoroh/docs/adr/` (to be created in X-08).
+ADR template and numbering live under `xoroh/docs/adr/` (created with the foundation slice).
 
 ---
 

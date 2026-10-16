@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - __DEFAULT_BRANCH__
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Verify scaffold files
+        run: |
+          test -f README.md
+          test -f AGENTS.md
+          test -f CONTRIBUTING.md
+          test -f SECURITY.md
+          test -f SUPPORT.md
+          test -f CODE_OF_CONDUCT.md
+          test -f LICENSE
+          test -f STANDARDS.md
+          test -f ADOPTED_STANDARDS.md
+
+      - name: Reject unresolved placeholders
+        run: |
+          if grep -rn "__[A-Z][A-Z0-9_]*__" --exclude-dir=.git . ; then
+            echo "Unresolved placeholders remain; fill every placeholder value."
+            exit 1
+          fi
+
+      - name: Validate scaffold
+        run: |
+          if command -v node >/dev/null 2>&1; then node scripts/check-scaffold.mjs;
+          elif command -v bun >/dev/null 2>&1; then bun scripts/check-scaffold.mjs;
+          else echo "No Node or Bun runtime for check-scaffold.mjs"; exit 1; fi

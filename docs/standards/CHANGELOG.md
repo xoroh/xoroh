@@ -12,3 +12,6 @@ and how consumers adopt it.
 - Consumer fixture (`fixtures/min-consumer/`) with adoption validator
   (`bun run check:fixture`), wired into the CI `validate` job. No new
   dependencies; no `workflow_call` interface.
+- Stack-neutral scaffold template (`docs/templates/scaffold/`) with usage
+  guide, self-check validator, and trial evidence (isolated instantiation,
+  negative test, registry accommodation).

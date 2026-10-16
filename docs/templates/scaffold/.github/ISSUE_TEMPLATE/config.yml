@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security policy
+    url: __SECURITY_ADVISORIES_URL__
+    about: Report vulnerabilities privately; never open a public issue for one.

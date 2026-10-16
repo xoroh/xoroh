@@ -1,0 +1,5 @@
+# Generated output, coverage, and local secrets. Extend for the project's
+# toolchain (e.g. node_modules, build caches, IDE directories).
+dist/
+coverage/
+.env
