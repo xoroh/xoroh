@@ -5,9 +5,25 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const site = join(import.meta.dir);
+const routes = join(site, "src", "routes");
+
+// TanStack Start routes backing each search-index URL path.
+const routeForPath: Record<string, string> = {
+	"/": join(routes, "index.tsx"),
+	"/news": join(routes, "news.tsx"),
+};
 
 function readIndex() {
 	return JSON.parse(readFileSync(join(site, "search-index.json"), "utf8"));
+}
+
+function sourceFor(url: string): {
+	file: string;
+	fragment: string | undefined;
+} {
+	const [path, fragment] = String(url).split("#");
+	const file = routeForPath[path];
+	return { file, fragment };
 }
 
 describe("search-index.json", () => {
@@ -33,14 +49,14 @@ describe("search-index.json", () => {
 		expect(new Set(urls).size).toBe(urls.length);
 	});
 
-	test("every url resolves to a page and anchor", () => {
+	test("every url resolves to a route and anchor", () => {
 		for (const entry of readIndex().entries) {
-			const [file, fragment] = String(entry.url).split("#");
-			const page = join(site, file.replace(/^\.\//, ""));
-			expect(existsSync(page)).toBe(true);
+			const { file, fragment } = sourceFor(entry.url);
+			expect(file).toBeDefined();
+			expect(existsSync(file)).toBe(true);
 			if (fragment) {
-				const html = readFileSync(page, "utf8");
-				expect(html.includes(`id="${fragment}"`)).toBe(true);
+				const source = readFileSync(file, "utf8");
+				expect(source.includes(`id="${fragment}"`)).toBe(true);
 			}
 		}
 	});
@@ -48,20 +64,20 @@ describe("search-index.json", () => {
 
 describe("hub copy rules", () => {
 	test("no stale links or product noun", () => {
-		for (const name of ["index.html", "news.html"]) {
-			const html = readFileSync(join(site, name), "utf8");
-			expect(html.includes("ui.xoroh.org")).toBe(false);
-			expect(html.includes('href="/docs"')).toBe(false);
-			expect(html.includes('href="/projects"')).toBe(false);
-			expect(html.includes("Xoroh OSS")).toBe(false);
+		for (const name of ["index.tsx", "news.tsx"]) {
+			const source = readFileSync(join(routes, name), "utf8");
+			expect(source.includes("ui.xoroh.org")).toBe(false);
+			expect(source.includes('href="/docs"')).toBe(false);
+			expect(source.includes('href="/projects"')).toBe(false);
+			expect(source.includes("Xoroh OSS")).toBe(false);
 		}
 	});
 
 	test("install snippets carry availability marks", () => {
-		const html = readFileSync(join(site, "index.html"), "utf8");
-		expect(html.includes("Available at release")).toBe(true);
-		expect(html.includes("@xoroh/kern-m3")).toBe(true);
-		expect(html.includes("kern-material-3")).toBe(false);
-		expect(html.includes("@xoroh/axis")).toBe(true);
+		const source = readFileSync(join(routes, "index.tsx"), "utf8");
+		expect(source.includes("Available at release")).toBe(true);
+		expect(source.includes("@xoroh/kern-m3")).toBe(true);
+		expect(source.includes("kern-material-3")).toBe(false);
+		expect(source.includes("@xoroh/axis")).toBe(true);
 	});
 });

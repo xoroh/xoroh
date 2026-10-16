@@ -3,32 +3,32 @@
 	"entries": [
 		{
 			"title": "Xoroh open-source hub",
-			"url": "./index.html",
+			"url": "/",
 			"keywords": ["hub", "open source", "xoroh.org"]
 		},
 		{
 			"title": "Kern",
-			"url": "./index.html#kern",
+			"url": "/#kern",
 			"keywords": ["kern", "design system", "material design 3", "incubating"]
 		},
 		{
 			"title": "Axis",
-			"url": "./index.html#axis",
+			"url": "/#axis",
 			"keywords": ["axis", "native", "primitives", "base ui", "sandbox"]
 		},
 		{
 			"title": "News stream",
-			"url": "./news.html",
+			"url": "/news",
 			"keywords": ["news", "releases", "governance", "security"]
 		},
 		{
 			"title": "Stream opens at launch",
-			"url": "./news.html#stream-opens-at-launch",
+			"url": "/news#stream-opens-at-launch",
 			"keywords": ["launch", "0.1.0", "release notes"]
 		},
 		{
 			"title": "Where things live",
-			"url": "./index.html#domains",
+			"url": "/#domains",
 			"keywords": [
 				"domains",
 				"xoroh.com",

@@ -1,0 +1,18 @@
+# Xoroh open-source hub
+
+> The open-source hub of Xoroh (xoroh.org). Commercial SaaS lives at
+> xoroh.com; this site covers community open source only.
+
+## Pages
+
+- [Hub home](/): projects (Kern, Axis), news pointer, domain table
+- [News](/news): one stream for releases, governance notes, and security notes
+
+## Projects
+
+- Kern — One foundation. Every design system. Docs: https://kern.xoroh.org
+- Axis — Unstyled, accessible behavior primitives for native. Docs: https://github.com/xoroh/axis/tree/development/docs
+
+## Search
+
+- Machine index: /search-index.json (hand-maintained per O-4; Pagefind only past ~50 pages)
