@@ -20,6 +20,9 @@ access, inspect, or reference its contents.
 
 - Release preparation: `.agents/skills/release-prep/SKILL.md` (stops before
   publication; never removes holds).
+- New-monorepo onboarding: `.agents/skills/xoroh-new-monorepo/SKILL.md`
+  (discover standards, inspect stack, adapt scaffold, validate, record
+  adoption; stops before releases, permission changes, cross-repo actions).
 - Standards changes: follow `docs/governance.md` and record decisions as ADRs
   in `docs/adr/`.
 

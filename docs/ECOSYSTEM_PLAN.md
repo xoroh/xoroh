@@ -298,12 +298,15 @@ No npm-publication conventions imposed on non-publishing repos.
 
 ## 9. Distribution, synchronization, and versioning strategy
 
-**Recommended: hybrid model by artifact type (Recommended, [APPROVAL]):**
+**Accepted: copy-first distribution (ADR-001, 2026-10-16); versioning per
+accepted ADR-002.** Canonical source is `xoroh/xoroh`; consumers adopt
+pinned copies through reviewed PRs. The table below is the accepted
+artifact policy:
 
 | Artifact | Mechanism | Rationale |
 |----------|-----------|-----------|
-| CI quality-gate logic (lint/typecheck/test recipes) | Reusable workflows (`workflow_call`, pinned by SHA/tag) | Update visibility + centralized fixes; consumers pin |
-| Small static files (editorconfig, PR/issue templates, `AGENTS.md` core, Dependabot defaults) | Versioned template repo or `docs/standards/` copies + checksum manifest | Offline-friendly; explicit update PRs; trivial rollback |
+| CI quality-gate logic | Starter conventions copied; `workflow_call` deferred until a real consumer validates the interface | Proven copies first; no unvalidated shared execution |
+| Small static files (editorconfig, PR/issue templates, `AGENTS.md` core, Dependabot defaults) | Versioned copies with documented provenance | Offline-friendly; explicit update PRs; trivial rollback |
 | Release-prep skill/procedure | Versioned skill directory, copied per repo, changelog-noted | Agents need local files; review diffs on update |
 | Policy docs (security, versioning, branching) | Canonical markdown in Xoroh + per-repo pointer | Avoid competing authoritative copies |
 | Emergency security fixes | Direct PR from Xoroh maintainers to each repo (fast lane), then backfill template | Speed with audit trail |
@@ -311,11 +314,14 @@ No npm-publication conventions imposed on non-publishing repos.
 **Explicitly rejected:** Git submodules (poor UX/rollback), automated silent
 sync bots (silent divergence), live cross-repo imports (violates §6 autonomy).
 
-Versioning: shared standards use SemVer-ish `STANDARDS-vX.Y.Z` tags on Xoroh;
+Versioning: shared standards use Semantic Versioning 2.0.0 with a `0.x`
+preview phase and `STANDARDS-vX.Y.Z` tags, per accepted ADR-002. Post-`1.0.0`,
 breaking = any change that fails previously-passing consumers
-(new required check, renamed workflow input, stricter gate). Consumers pin by
+(new required check, renamed workflow input, stricter gate); pre-1.0,
+breaking changes may land in minor increments. Consumers pin by
 tag/SHA, validate via `docs/standards/CHANGELOG.md` migration notes, roll back
 by re-pinning. Deprecated standards get a 30-day sunset notice in the index.
+No tags are created until separately authorized.
 
 ---
 
@@ -552,7 +558,7 @@ work in Phase 2 depends on them.
 | X-08 | Repo-type profiles + templates | `xoroh/docs/standards/*`, `docs/templates/scaffold/` | X-06 | New-repo trial from template passes its checks (hosted new-repo CI not possible without creating a repository — recorded limitation). Status: scaffold template + usage guide implemented; isolated trial passed (instantiation, validators, negative test, registry accommodation); see reconciliation log |
 | X-09 | `release-prep` skill v1 | `xoroh/.agents/skills/release-prep/` | X-06 | Dry-run on Kern produces manifest, stops pre-publish |
 | X-10 | Project index + metadata schema (public repos only; excluded private repo is not listed) | `xoroh/projects.json` (+ generated page later) | X-06 (built without templates; corrected 2026-10-16 — see reconciliation log) | `bun run check:index` validates; all 4 public projects listed, unknowns `tbd-owner-input` |
-| X-11 | Standards versioning + changelog | `xoroh/docs/standards/CHANGELOG.md`, `STANDARDS-v*` tags | X-07–X-10 | Tag + migration notes; consumer re-pin trial works |
+| X-11 | Standards versioning + changelog | `xoroh/docs/standards/CHANGELOG.md`, `STANDARDS-v*` tags | Distribution decided (ADR-001), versioning decided (ADR-002); tag creation still gated | Policy complete; first tag (`0.1.0` content + creation) needs separate authorization; then consumer re-pin trial |
 
 ### Phase 3 — Adoption (non-disruptive)
 
@@ -570,7 +576,7 @@ work in Phase 2 depends on them.
 | ID | Objective | Depends | Acceptance |
 |----|-----------|---------|------------|
 | X-12 | Ecosystem baseline validation (all O1–O9 re-measured) | All above | Audit rerun; 14-day green; report filed |
-| X-13 | Ongoing ownership calendar (standards review cadence, index upkeep, ADR process) | X-12 | `docs/GOVERNANCE.md` maintenance section merged |
+| X-13 | Ongoing ownership calendar (standards review cadence, index upkeep, ADR process) | X-12 | `docs/governance.md` maintenance section merged |
 
 Critical blockers: K-01, K-02, X-02. Everything else sequences behind them.
 
@@ -622,7 +628,7 @@ npm pack --dry-run  # in package dir; inspect files, never publish
 
 | ADR | Question | Recommended direction | Status |
 |-----|----------|----------------------|--------|
-| ADR-X-01 | Standards distribution mechanism | Hybrid by artifact type (§9) | Proposed in this plan |
+| ADR-X-01 | Standards distribution mechanism | Copy-first: canonical repo + pinned consumer copies (accepted ADR-001); `workflow_call`/automation deferred | Accepted 2026-10-16 (ADR-001); versioning split into accepted ADR-002 |
 | ADR-X-02 | Release approval policy | Proportional approvals + HOLD until roster fixed | Proposed, [APPROVAL] |
 | ADR-KA-01 | DTCG as token interop baseline | Yes for Kern↔Axis; Axis owns no token system | Proposed; confirm in MG-02 |
 | ADR-AX-01 | Axis native stack | Undecided — decision required before primitives | Open, owner+maintainer input |
@@ -638,7 +644,9 @@ ADR template and numbering live under `xoroh/docs/adr/` (created with the founda
 
 1. [APPROVAL] Release-team roster: add ≥1 approver or record single-maintainer exception with HOLD conditions? (X-02)
 2. [APPROVAL] Required-check expansion on `kern/main` and approval-count policy. (K-02, X-02)
-3. [APPROVAL] Standards distribution model (§9) and standards SemVer policy.
+3. Standards distribution model — DECIDED 2026-10-16 (ADR-001 accepted:
+   copy-first). Tag creation, releases, and downstream adoption each still
+   require separate authorization.
 4. [APPROVAL] Axis package name (`@xoroh/axis` vs split). (X-05/ADR-AX-02)
 5. [APPROVAL] Axis stack + Atlas framework choices (need maintainer recommendations first).
 6. [APPROVAL] CodeQL vs alternative; secret/push-protection exceptions if any. (X-03)

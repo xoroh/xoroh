@@ -1,6 +1,10 @@
-# Standards Versioning (draft — pending owner approval of ADR-001)
+# Standards Versioning (accepted policy per ADR-002, 2026-10-16)
 
-## Scheme
+Semantic Versioning 2.0.0 with a `0.x` preview phase; see ADR-002 for the
+full contract. Tags use `STANDARDS-vMAJOR.MINOR.PATCH` (Xoroh naming
+convention). No tags are created until separately authorized.
+
+## Scheme (post-`1.0.0` contract; pre-1.0 rules in ADR-002)
 
 Shared standards are versioned `STANDARDS-vX.Y.Z`, recorded in `CHANGELOG.md`:
 

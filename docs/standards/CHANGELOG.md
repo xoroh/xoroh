@@ -6,6 +6,15 @@ and how consumers adopt it.
 ## Unreleased
 
 - Initial universal baseline, repository-type profiles, and versioning draft.
+- New-monorepo onboarding skill (`.agents/skills/xoroh-new-monorepo/`) with
+  ordered checklist reference; discoverable via root `AGENTS.md` and the
+  template adoption procedure (copy the skill directory; no auto-discovery
+  assumed).
+- ADR-001 accepted (copy-first distribution); ADR-002 accepted (SemVer 2.0.0,
+  `0.x` preview, `STANDARDS-vX.Y.Z`). New: adoption-record format
+  (`docs/standards/adoption.md`), release-notes/migration convention,
+  30-day deprecation default with emergency exceptions, and `0.1.0`
+  readiness checklist (all documentation; no tags or releases created).
 - Project index (`projects.json`) with schema and local validator.
 - Release-prep skill and release procedure (human approval required; no tags
   or publishes created by this change).

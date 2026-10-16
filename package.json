@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "check:index": "bun scripts/check-index.mjs",
-    "check:fixture": "bun fixtures/min-consumer/scripts/check-adoption.mjs"
+    "check:fixture": "bun fixtures/min-consumer/scripts/check-adoption.mjs",
+    "check:scaffold-trial": "bun scripts/check-scaffold-trial.mjs"
   }
 }
