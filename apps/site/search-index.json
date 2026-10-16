@@ -1,0 +1,41 @@
+{
+	"$schema": "./search-index.schema.json",
+	"entries": [
+		{
+			"title": "Xoroh open-source hub",
+			"url": "./index.html",
+			"keywords": ["hub", "open source", "xoroh.org"]
+		},
+		{
+			"title": "Kern",
+			"url": "./index.html#kern",
+			"keywords": ["kern", "design system", "material design 3", "incubating"]
+		},
+		{
+			"title": "Axis",
+			"url": "./index.html#axis",
+			"keywords": ["axis", "native", "primitives", "base ui", "sandbox"]
+		},
+		{
+			"title": "News stream",
+			"url": "./news.html",
+			"keywords": ["news", "releases", "governance", "security"]
+		},
+		{
+			"title": "Stream opens at launch",
+			"url": "./news.html#stream-opens-at-launch",
+			"keywords": ["launch", "0.1.0", "release notes"]
+		},
+		{
+			"title": "Where things live",
+			"url": "./index.html#domains",
+			"keywords": [
+				"domains",
+				"xoroh.com",
+				"kern.xoroh.org",
+				"xoroh.app",
+				"xoroh.dev"
+			]
+		}
+	]
+}
