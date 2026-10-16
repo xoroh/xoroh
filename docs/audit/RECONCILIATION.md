@@ -290,3 +290,43 @@ authorization, executed under root `AGENTS.md` + release-prep skill rules.
   not a technical interlock — an agent ignoring instructions is outside what
   repository evidence can prevent. This satisfies the criterion as written
   (trial refuses without approval); it does not prove misbehavior impossible.
+
+## X-08 scaffold template trial (2026-10-16 UTC)
+
+Template at `docs/templates/scaffold/` (+ usage guide `docs/templates/README.md`):
+19 files — README, AGENTS.md, CONTRIBUTING, SECURITY, SUPPORT, CODE_OF_CONDUCT,
+MIT LICENSE (holder/year placeholders; MIT per ecosystem convention, change
+requires updating references), STANDARDS.md (inherited vs project-supplied vs
+owner-verified), ADOPTED_STANDARDS.md (pin placeholder), stack-neutral CI
+starter (pinned checkout v7.0.1, least privilege, timeouts, file checks,
+placeholder guard), PR/issue templates, dependabot (github-actions only),
+editorconfig, generic gitignore, `scripts/check-scaffold.mjs` (required files,
+`__UPPER_SNAKE__` markers, secret patterns, links, SHA pins, pin record).
+
+Shared vs project-specific: template enforces only baseline mechanics; every
+project value (name, purpose, maintainers, toolchain, license holder, release
+model) is an unmistakable placeholder — no sample values shippable as real
+metadata. No stack imposed (verified: no toolchain references outside the
+check runner choice). No owner decisions taken (ADR-001 still proposed, no
+tags, no roster, no scanning claims, MIT offered as convention with explicit
+confirmation step, not legal approval).
+
+Trial (isolated temp git repo, never pushed): all 19 markers filled with test
+values → `check-scaffold` OK (18 files — `.git` excluded — no placeholders,
+no secrets, links resolve), exit 0. Negative copy (leftover marker, fake
+`ghp_` token, unpinned `@v7`, deleted SECURITY.md, broken links) → 6 named
+errors, exit 1. Registry: temp `projects.json` + trial entry → `check:index`
+OK (5 projects); real registry untouched. Trial YAML parses
+(`[scaffold]`, no `workflow_call`). Temp artifacts removed; worktree verified
+clean afterward.
+
+Defects found and fixed in-template: CI echo message itself contained a
+`__UPPER_SNAKE__` marker (self-failing guard) — reworded; same for the usage
+guide cross-reference. Trial-script note: naive `.git`-substring exclusion
+skipped `.github/` files — corrected to path-segment matching (trial
+procedure only, not a repo defect).
+
+Limitation: "passes CI in <15 min" proven for the template's checks locally
+and for structurally identical CI YAML parsing; a hosted run on a real new
+repository is impossible without creating one (unauthorized) — recorded, not
+assumed.
