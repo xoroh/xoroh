@@ -2,7 +2,29 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/governance")({
 	head: () => ({
-		meta: [{ title: "Governance — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Governance — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"How decisions get made for the Xoroh open-source hub: proposing changes, accepting and deprecating, maintenance cadence, and conduct contact.",
+			},
+			{ property: "og:title", content: "Governance — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"How decisions get made for the Xoroh open-source hub: proposing changes, accepting and deprecating, maintenance cadence, and conduct contact.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/governance" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Governance — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"How decisions get made for the Xoroh open-source hub: proposing changes, accepting and deprecating, maintenance cadence, and conduct contact.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/governance" }],
 	}),
 	component: Governance,
@@ -10,7 +32,7 @@ export const Route = createFileRoute("/governance")({
 
 function Governance() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Governance</h1>
 			<p>
 				The open-source hub of Xoroh is maintained by the Xoroh organization

@@ -2,7 +2,32 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/contributing")({
 	head: () => ({
-		meta: [{ title: "Contributing — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Contributing — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"How to contribute to the Xoroh open-source hub: Bun 1.4.2 setup, the checks every PR runs, and pull-request rules.",
+			},
+			{ property: "og:title", content: "Contributing — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"How to contribute to the Xoroh open-source hub: Bun 1.4.2 setup, the checks every PR runs, and pull-request rules.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/contributing" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{
+				name: "twitter:title",
+				content: "Contributing — Xoroh open-source hub",
+			},
+			{
+				name: "twitter:description",
+				content:
+					"How to contribute to the Xoroh open-source hub: Bun 1.4.2 setup, the checks every PR runs, and pull-request rules.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/contributing" }],
 	}),
 	component: Contributing,
@@ -10,7 +35,7 @@ export const Route = createFileRoute("/contributing")({
 
 function Contributing() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Contributing</h1>
 			<p>
 				Contributions are welcome. For a substantial change, open an issue first

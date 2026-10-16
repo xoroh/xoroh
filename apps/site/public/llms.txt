@@ -22,7 +22,7 @@
 ## Projects
 
 - Kern — One foundation. Every design system. Docs: https://kern.xoroh.org — Repo: https://github.com/xoroh/kern — Install: `bun add @xoroh/kern @xoroh/kern-tokens @xoroh/kern-m3` (Available at release (0.1.0))
-- Axis — Design-system-neutral native-mobile behavior and accessibility primitives. Docs: https://github.com/xoroh/axis/tree/development/docs (no axis.xoroh.org in v1) — Repo: https://github.com/xoroh/axis — Install: `bun add @xoroh/axis` (Available at release (0.1.0); peers react>=18, react-native>=0.86 <0.89)
+- Axis — Design-system-neutral native-mobile behavior and accessibility primitives. Docs: https://github.com/xoroh/axis/tree/main/docs (no axis.xoroh.org in v1) — Repo: https://github.com/xoroh/axis — Install: `bun add @xoroh/axis` (Available at release (0.1.0); peers react>=18, react-native>=0.86 <0.89)
 - Registry source of truth: https://github.com/xoroh/xoroh/blob/main/projects.json
 
 ## Docs and standards

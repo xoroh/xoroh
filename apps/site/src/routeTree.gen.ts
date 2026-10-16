@@ -16,8 +16,9 @@ import { Route as DocsRouteImport } from './routes/docs'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as MaturityRouteImport } from './routes/maturity'
 import { Route as NewsRouteImport } from './routes/news'
-import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ProjectsRouteRouteImport } from './routes/projects.route'
 import { Route as SecurityRouteImport } from './routes/security'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsAxisRouteImport } from './routes/projects.axis'
 import { Route as ProjectsKernRouteImport } from './routes/projects.kern'
 
@@ -56,7 +57,7 @@ const NewsRoute = NewsRouteImport.update({
   path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsRoute = ProjectsRouteImport.update({
+const ProjectsRouteRoute = ProjectsRouteRouteImport.update({
   id: '/projects',
   path: '/projects',
   getParentRoute: () => rootRouteImport,
@@ -66,29 +67,35 @@ const SecurityRoute = SecurityRouteImport.update({
   path: '/security',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectsRouteRoute,
+} as any)
 const ProjectsAxisRoute = ProjectsAxisRouteImport.update({
   id: '/axis',
   path: '/axis',
-  getParentRoute: () => ProjectsRoute,
+  getParentRoute: () => ProjectsRouteRoute,
 } as any)
 const ProjectsKernRoute = ProjectsKernRouteImport.update({
   id: '/kern',
   path: '/kern',
-  getParentRoute: () => ProjectsRoute,
+  getParentRoute: () => ProjectsRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/projects': typeof ProjectsRouteRouteWithChildren
   '/brand': typeof BrandRoute
   '/contributing': typeof ContributingRoute
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/maturity': typeof MaturityRoute
   '/news': typeof NewsRoute
-  '/projects': typeof ProjectsRouteWithChildren
   '/security': typeof SecurityRoute
   '/projects/axis': typeof ProjectsAxisRoute
   '/projects/kern': typeof ProjectsKernRoute
+  '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -98,39 +105,41 @@ export interface FileRoutesByTo {
   '/governance': typeof GovernanceRoute
   '/maturity': typeof MaturityRoute
   '/news': typeof NewsRoute
-  '/projects': typeof ProjectsRouteWithChildren
   '/security': typeof SecurityRoute
   '/projects/axis': typeof ProjectsAxisRoute
   '/projects/kern': typeof ProjectsKernRoute
+  '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/projects': typeof ProjectsRouteRouteWithChildren
   '/brand': typeof BrandRoute
   '/contributing': typeof ContributingRoute
   '/docs': typeof DocsRoute
   '/governance': typeof GovernanceRoute
   '/maturity': typeof MaturityRoute
   '/news': typeof NewsRoute
-  '/projects': typeof ProjectsRouteWithChildren
   '/security': typeof SecurityRoute
   '/projects/axis': typeof ProjectsAxisRoute
   '/projects/kern': typeof ProjectsKernRoute
+  '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/projects'
     | '/brand'
     | '/contributing'
     | '/docs'
     | '/governance'
     | '/maturity'
     | '/news'
-    | '/projects'
     | '/security'
     | '/projects/axis'
     | '/projects/kern'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -140,34 +149,35 @@ export interface FileRouteTypes {
     | '/governance'
     | '/maturity'
     | '/news'
-    | '/projects'
     | '/security'
     | '/projects/axis'
     | '/projects/kern'
+    | '/projects'
   id:
     | '__root__'
     | '/'
+    | '/projects'
     | '/brand'
     | '/contributing'
     | '/docs'
     | '/governance'
     | '/maturity'
     | '/news'
-    | '/projects'
     | '/security'
     | '/projects/axis'
     | '/projects/kern'
+    | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProjectsRouteRoute: typeof ProjectsRouteRouteWithChildren
   BrandRoute: typeof BrandRoute
   ContributingRoute: typeof ContributingRoute
   DocsRoute: typeof DocsRoute
   GovernanceRoute: typeof GovernanceRoute
   MaturityRoute: typeof MaturityRoute
   NewsRoute: typeof NewsRoute
-  ProjectsRoute: typeof ProjectsRouteWithChildren
   SecurityRoute: typeof SecurityRoute
 }
 
@@ -226,7 +236,7 @@ declare module '@tanstack/react-router' {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
+      preLoaderRoute: typeof ProjectsRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/security': {
@@ -236,46 +246,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecurityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/': {
+      id: '/projects/'
+      path: '/'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof ProjectsRouteRoute
+    }
     '/projects/axis': {
       id: '/projects/axis'
       path: '/axis'
       fullPath: '/projects/axis'
       preLoaderRoute: typeof ProjectsAxisRouteImport
-      parentRoute: typeof ProjectsRoute
+      parentRoute: typeof ProjectsRouteRoute
     }
     '/projects/kern': {
       id: '/projects/kern'
       path: '/kern'
       fullPath: '/projects/kern'
       preLoaderRoute: typeof ProjectsKernRouteImport
-      parentRoute: typeof ProjectsRoute
+      parentRoute: typeof ProjectsRouteRoute
     }
   }
 }
 
-interface ProjectsRouteChildren {
+interface ProjectsRouteRouteChildren {
   ProjectsAxisRoute: typeof ProjectsAxisRoute
   ProjectsKernRoute: typeof ProjectsKernRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
-const ProjectsRouteChildren: ProjectsRouteChildren = {
+const ProjectsRouteRouteChildren: ProjectsRouteRouteChildren = {
   ProjectsAxisRoute: ProjectsAxisRoute,
   ProjectsKernRoute: ProjectsKernRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
 }
 
-const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
-  ProjectsRouteChildren,
+const ProjectsRouteRouteWithChildren = ProjectsRouteRoute._addFileChildren(
+  ProjectsRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProjectsRouteRoute: ProjectsRouteRouteWithChildren,
   BrandRoute: BrandRoute,
   ContributingRoute: ContributingRoute,
   DocsRoute: DocsRoute,
   GovernanceRoute: GovernanceRoute,
   MaturityRoute: MaturityRoute,
   NewsRoute: NewsRoute,
-  ProjectsRoute: ProjectsRouteWithChildren,
   SecurityRoute: SecurityRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,18 +1,343 @@
 @import "tailwindcss";
 
+/* Xoroh hub design tokens (v1 polish). Dark theme kept from v1:
+   body #f5f5f4 on #0b0b0c = 18.0:1, accent #facc15 on bg = 12.9:1,
+   muted #d4d4d8 on bg ~= 11:1. All clear WCAG 2.2 AA for normal text. */
+:root {
+	--bg: #0b0b0c;
+	--surface: #161617;
+	--surface-raised: #1d1d1f;
+	--text: #f5f5f4;
+	--muted: #d4d4d8;
+	--accent: #facc15;
+	--accent-ink: #0b0b0c;
+	--border: #2b2b2e;
+	--focus: #facc15;
+	--max-width: 68rem;
+	--radius: 0.75rem;
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+	--font-mono: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
 body {
-	font-family: system-ui, sans-serif;
+	font-family: var(--font-sans);
 	margin: 0;
-	background: #0b0b0c;
-	color: #f5f5f4;
+	background: var(--bg);
+	color: var(--text);
+	font-size: 1.0625rem;
+	line-height: 1.7;
+	-webkit-text-size-adjust: 100%;
 }
 
-main {
-	max-width: 640px;
-	margin: 10vh auto;
-	padding: 0 1.5rem;
+/* Type scale: fluid via clamp, consistent across routes. */
+h1,
+h2,
+h3 {
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	text-wrap: balance;
 }
 
+h1 {
+	font-size: clamp(2rem, 1.4rem + 3vw, 3rem);
+	margin: 0 0 var(--space-4);
+}
+
+h2 {
+	font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+	margin: var(--space-12) 0 var(--space-3);
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin: var(--space-8) 0 var(--space-2);
+}
+
+p {
+	margin: 0 0 var(--space-4);
+	max-width: 70ch;
+}
+
+ul,
+ol {
+	margin: 0 0 var(--space-4);
+	padding-left: var(--space-6);
+}
+
+li {
+	margin-bottom: var(--space-2);
+	max-width: 70ch;
+}
+
+li::marker {
+	color: var(--accent);
+}
+
+/* Links: underline offset for readability, accent with AA contrast.
+   Long URLs (registry advisory/support links) wrap instead of overflowing
+   narrow viewports. */
 a {
-	color: #facc15;
+	color: var(--accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+	overflow-wrap: anywhere;
+}
+
+a:hover {
+	text-decoration-thickness: 2px;
+}
+
+/* Skip link: first tab stop, visible only on focus. */
+.skip-link {
+	position: absolute;
+	left: var(--space-4);
+	top: -100px;
+	z-index: 100;
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: var(--space-2) var(--space-4);
+	background: var(--accent);
+	color: var(--accent-ink);
+	font-weight: 700;
+	text-decoration: none;
+	border-radius: var(--space-2);
+}
+
+.skip-link:focus {
+	top: var(--space-4);
+}
+
+/* Focus visible everywhere, never obscured: anchor targets keep clearance. */
+:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+[id] {
+	scroll-margin-top: var(--space-4);
+}
+
+/* Skip-link target itself is focusable to move keyboard focus. */
+#main-content:focus {
+	outline: none;
+}
+
+#main-content:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 4px;
+}
+
+/* Header + primary nav: list semantics, wrapping, >=44px tap targets. */
+.site-header {
+	border-bottom: 1px solid var(--border);
+	background: var(--bg);
+}
+
+.site-nav {
+	max-width: var(--max-width);
+	margin-inline: auto;
+	padding: var(--space-2) var(--space-4);
+}
+
+.site-nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-1) var(--space-2);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site-nav li {
+	margin: 0;
+	max-width: none;
+}
+
+.site-nav a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	min-width: 24px;
+	padding: var(--space-1) var(--space-3);
+	border-radius: var(--space-2);
+	color: var(--text);
+	text-decoration: none;
+}
+
+.site-nav a:hover {
+	background: var(--surface-raised);
+	text-decoration: none;
+}
+
+.site-nav a[aria-current="page"] {
+	background: var(--surface-raised);
+	box-shadow: inset 0 0 0 1px var(--border);
+	font-weight: 600;
+}
+
+.site-brand {
+	font-weight: 800;
+	letter-spacing: 0.01em;
+}
+
+/* Page body: readable measure on wide screens, comfortable gutters on 320px. */
+main {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: var(--space-8) var(--space-4) var(--space-12);
+}
+
+section {
+	margin-block: var(--space-8);
+}
+
+section:first-of-type {
+	margin-top: var(--space-6);
+}
+
+/* Cards: article blocks share one surface/border/rhythm on every route. */
+article {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: var(--space-6);
+	margin-block: var(--space-6);
+}
+
+article > :first-child {
+	margin-top: 0;
+}
+
+article > :last-child {
+	margin-bottom: 0;
+}
+
+article h2,
+article h3 {
+	margin-top: 0;
+}
+
+/* Code: inline and blocks, blocks scroll horizontally instead of overflowing. */
+code {
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	background: var(--surface-raised);
+	border: 1px solid var(--border);
+	border-radius: var(--space-1);
+	padding: 0.1em 0.35em;
+	overflow-wrap: break-word;
+}
+
+pre {
+	max-width: 100%;
+	overflow-x: auto;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: var(--space-4);
+	font-size: 0.875rem;
+	line-height: 1.6;
+}
+
+pre code {
+	background: none;
+	border: none;
+	padding: 0;
+	font-size: inherit;
+}
+
+/* Footer landmark: consistent on every route via the shell. */
+.site-footer {
+	border-top: 1px solid var(--border);
+}
+
+.site-footer-inner {
+	max-width: var(--max-width);
+	margin-inline: auto;
+	padding: var(--space-8) var(--space-4);
+	color: var(--muted);
+	font-size: 0.9375rem;
+}
+
+.site-footer-inner p {
+	margin-bottom: var(--space-2);
+}
+
+/* Footer contact links share the >=44px tap target of footer nav links. */
+.site-footer-inner p a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: var(--space-1) var(--space-2);
+	margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-2));
+}
+
+.site-footer nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1) var(--space-2);
+	list-style: none;
+	margin: 0 0 var(--space-4);
+	padding: 0;
+}
+
+.site-footer nav li {
+	margin: 0;
+}
+
+.site-footer nav a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: var(--space-1) var(--space-2);
+}
+
+/* Narrow screens: keep gutters tight, tap targets intact, no overflow. */
+@media (max-width: 480px) {
+	main {
+		padding: var(--space-6) var(--space-4) var(--space-8);
+	}
+
+	article {
+		padding: var(--space-4);
+	}
+
+	.site-nav {
+		padding: var(--space-2);
+	}
+}
+
+/* Reduced motion: honor the OS setting, keep smooth scrolling off. */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }

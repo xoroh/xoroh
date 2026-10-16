@@ -2,7 +2,29 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/brand")({
 	head: () => ({
-		meta: [{ title: "Brand — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Brand — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"Xoroh brand: the provisional plain-text wordmark, naming rules, and where things live across xoroh.com, xoroh.org, and kern.xoroh.org.",
+			},
+			{ property: "og:title", content: "Brand — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"Xoroh brand: the provisional plain-text wordmark, naming rules, and where things live across xoroh.com, xoroh.org, and kern.xoroh.org.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/brand" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Brand — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"Xoroh brand: the provisional plain-text wordmark, naming rules, and where things live across xoroh.com, xoroh.org, and kern.xoroh.org.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/brand" }],
 	}),
 	component: Brand,
@@ -10,7 +32,7 @@ export const Route = createFileRoute("/brand")({
 
 function Brand() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Brand</h1>
 			<p>
 				"Xoroh" is a provisional plain-text wordmark — the legal name and mark

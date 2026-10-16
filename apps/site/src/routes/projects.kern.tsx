@@ -3,7 +3,29 @@ import { projectByName, targetMaturity } from "#/data/projects";
 
 export const Route = createFileRoute("/projects/kern")({
 	head: () => ({
-		meta: [{ title: "Kern — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Kern — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"Kern: one foundation, every design system, with Material Design 3 first. Install, packages, facts, and target maturity at 0.1.0.",
+			},
+			{ property: "og:title", content: "Kern — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"Kern: one foundation, every design system, with Material Design 3 first. Install, packages, facts, and target maturity at 0.1.0.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/projects/kern" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Kern — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"Kern: one foundation, every design system, with Material Design 3 first. Install, packages, facts, and target maturity at 0.1.0.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/projects/kern" }],
 	}),
 	component: Kern,
@@ -12,7 +34,7 @@ export const Route = createFileRoute("/projects/kern")({
 function Kern() {
 	const project = projectByName("kern");
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Kern</h1>
 			<p>One foundation. Every design system.</p>
 			<p>{project.purpose} Material Design 3 is its first system.</p>

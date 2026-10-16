@@ -2,7 +2,29 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
 	head: () => ({
-		meta: [{ title: "Xoroh — Open-source hub" }],
+		meta: [
+			{ title: "Xoroh — Open-source hub" },
+			{
+				name: "description",
+				content:
+					"The open-source hub of Xoroh: Kern and Axis projects, maturity targets, governance, contributing, security, brand, docs, and news.",
+			},
+			{ property: "og:title", content: "Xoroh — Open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"The open-source hub of Xoroh: Kern and Axis projects, maturity targets, governance, contributing, security, brand, docs, and news.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Xoroh — Open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"The open-source hub of Xoroh: Kern and Axis projects, maturity targets, governance, contributing, security, brand, docs, and news.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/" }],
 	}),
 	component: Home,
@@ -10,7 +32,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Xoroh</h1>
 			<p>
 				The open-source hub of Xoroh. Commercial SaaS lives at{" "}
@@ -66,9 +88,7 @@ function Home() {
 					</p>
 					<p>
 						<a href="https://github.com/xoroh/axis">Axis repo</a> ·{" "}
-						<a href="https://github.com/xoroh/axis/tree/development/docs">
-							Axis docs
-						</a>
+						<a href="https://github.com/xoroh/axis/tree/main/docs">Axis docs</a>
 					</p>
 				</article>
 			</section>
@@ -118,15 +138,6 @@ function Home() {
 					<li>xoroh.dev — on hold</li>
 				</ul>
 			</section>
-
-			<footer>
-				<p>
-					MIT licensed. "Xoroh" is a provisional plain-text wordmark — legal
-					name and mark are not final. Contact:{" "}
-					<a href="https://github.com/xoroh/xoroh/issues">issues</a> ·
-					conduct@xoroh.org
-				</p>
-			</footer>
 		</main>
 	);
 }

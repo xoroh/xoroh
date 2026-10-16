@@ -2,7 +2,29 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/maturity")({
 	head: () => ({
-		meta: [{ title: "Maturity — Xoroh open-source hub" }],
+		meta: [
+			{ title: "Maturity — Xoroh open-source hub" },
+			{
+				name: "description",
+				content:
+					"How Xoroh project maturity works: the Sandbox, Incubating, and Graduated ladder plus the Archived rule, seeded as targets at 0.1.0.",
+			},
+			{ property: "og:title", content: "Maturity — Xoroh open-source hub" },
+			{
+				property: "og:description",
+				content:
+					"How Xoroh project maturity works: the Sandbox, Incubating, and Graduated ladder plus the Archived rule, seeded as targets at 0.1.0.",
+			},
+			{ property: "og:url", content: "https://xoroh.org/maturity" },
+			{ property: "og:type", content: "website" },
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: "Maturity — Xoroh open-source hub" },
+			{
+				name: "twitter:description",
+				content:
+					"How Xoroh project maturity works: the Sandbox, Incubating, and Graduated ladder plus the Archived rule, seeded as targets at 0.1.0.",
+			},
+		],
 		links: [{ rel: "canonical", href: "https://xoroh.org/maturity" }],
 	}),
 	component: Maturity,
@@ -10,7 +32,7 @@ export const Route = createFileRoute("/maturity")({
 
 function Maturity() {
 	return (
-		<main>
+		<main id="main-content" tabIndex={-1}>
 			<h1>Maturity</h1>
 			<p>
 				The hub uses a CNCF-style ladder with published entry and exit evidence.
