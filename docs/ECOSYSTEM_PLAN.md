@@ -547,7 +547,7 @@ work in Phase 2 depends on them.
 
 | ID | Objective | Location | Depends | Acceptance + verification |
 |----|-----------|----------|---------|---------------------------|
-| X-06 | `AGENTS.md` core + prohibited-actions policy | `xoroh/AGENTS.md` | — (proceeds independently; X-02 remains the gate for releases only) | `test -f AGENTS.md`; agent trial run refuses mock publish without approval |
+| X-06 | `AGENTS.md` core + prohibited-actions policy | `xoroh/AGENTS.md` | — (proceeds independently; X-02 remains the gate for releases only) | `test -f AGENTS.md` ✓ (merged); mock-publish refusal trial executed 2026-10-16 — refused, no authorization present, publish never invoked; see reconciliation log |
 | X-07 | Starter CI conventions + consumer fixture harness (v1); callable reusable workflows only after fixture validation | `xoroh/.github/workflows/*`, `xoroh/fixtures/*` | X-06 | Starter conventions documented; fixture run green; no `workflow_call` interface published before a real consumer validates it. Status 2026-10-16: implemented, merged via PR #5 (commit `d701d82`), hosted CI green; see `fixtures/min-consumer/` + `docs/audit/RECONCILIATION.md` |
 | X-08 | Repo-type profiles + templates | `xoroh/docs/standards/*`, `xoroh/template-*` or `docs/templates/*` | X-06 | New-repo trial from template passes CI in <15 min |
 | X-09 | `release-prep` skill v1 | `xoroh/.agents/skills/release-prep/` | X-06 | Dry-run on Kern produces manifest, stops pre-publish |
