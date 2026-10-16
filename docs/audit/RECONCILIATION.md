@@ -238,3 +238,33 @@ Post-check: `check:index` and `check:fixture` green, worktree unchanged.
   diff) verified with green validators; merged commits are now the record.
 - Local bun still 1.3.8 (environmental; hosted CI is the verification path).
   Owner §21 decisions unchanged; no tags/releases created.
+
+## Full-roadmap reconciliation appendix (2026-10-16 UTC)
+
+Baseline re-verified: `main @ 53bd010` == `origin/main`, divergence 0/0,
+clean worktree, no stashes/worktrees/extra branches; HEAD CI (run 38833355800)
+success; protection still requires check `main`, approvals 0; local bun 1.3.8
+vs required >=1.4.2 (hosted CI is the verification path).
+
+Discrepancies found and disposition:
+
+- D1 (medium): fixture pin stale — `ADOPTED_STANDARDS.md` pins `1a1b2c9`
+  while merged `main` is `53bd010` and root checkout pins moved v4→v7.0.1
+  (fixture still v4). Validator still passes; the record itself required
+  re-pinning after merge. Queued as the single next task (re-pin), not fixed
+  here — this mission is audit-first.
+- D2 (low): X-10 listed Depends X-08 but was built/merged without templates.
+  Corrected in plan to X-06 with this note as evidence. No policy change.
+- D3 (low): X-06 trial-run acceptance (mock-publish refusal) never executed.
+  Queued as a micro-task; file itself is complete and merged.
+- D4 (low): §3.4/§3.1 project-state claims are dated 2026-10-16 with no
+  refresh path under current exclusions (Kern/Axis/Atlas not accessed in this
+  mission). Left as historical record; re-measurement belongs to a separately
+  authorized audit with access.
+- D5 (medium, proposal only): X-09 acceptance requires a Kern dry-run, which
+  needs separate authorization. Proposed: accept a local mock-package dry-run
+  for Xoroh-side completion and move the Kern dry-run under K-04. Not applied
+  — acceptance criteria changes need owner approval.
+
+Corrections applied in this mission: D2 plan-dependency fix + this appendix.
+Evidence inventory untouched (no factual error found).
