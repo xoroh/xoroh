@@ -90,11 +90,14 @@ li::marker {
 	color: var(--accent);
 }
 
-/* Links: underline offset for readability, accent with AA contrast. */
+/* Links: underline offset for readability, accent with AA contrast.
+   Long URLs (registry advisory/support links) wrap instead of overflowing
+   narrow viewports. */
 a {
 	color: var(--accent);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 3px;
+	overflow-wrap: anywhere;
 }
 
 a:hover {
@@ -278,6 +281,15 @@ pre code {
 
 .site-footer-inner p {
 	margin-bottom: var(--space-2);
+}
+
+/* Footer contact links share the >=44px tap target of footer nav links. */
+.site-footer-inner p a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: var(--space-1) var(--space-2);
+	margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-2));
 }
 
 .site-footer nav ul {
