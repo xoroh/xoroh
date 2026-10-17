@@ -165,6 +165,27 @@ describe("home showcase", () => {
 		expect(source.includes("setDarkPreview")).toBe(true);
 		expect(source.includes('setTone("rose")')).toBe(true);
 	});
+
+	test("hub grid links every hub page and fills the contact card", () => {
+		const source = read(routeForPath["/"]);
+		for (const to of [
+			"/maturity",
+			"/governance",
+			"/security",
+			"/contributing",
+			"/brand",
+			"/docs",
+			"/news",
+		]) {
+			expect(source.includes(`to: "${to}"`)).toBe(true);
+		}
+		expect(source.includes("hub-grid")).toBe(true);
+		expect(source.includes("hub-contact")).toBe(true);
+		// Contact must offer all three real paths, not a lone line of copy.
+		expect(source.includes("https://github.com/xoroh/xoroh/issues")).toBe(true);
+		expect(source.includes("mailto:conduct@xoroh.org")).toBe(true);
+		expect(source.includes('href="https://github.com/xoroh"')).toBe(true);
+	});
 });
 
 describe("registry-driven project pages", () => {

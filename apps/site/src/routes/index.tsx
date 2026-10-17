@@ -209,6 +209,61 @@ function ProjectFeature({ name, index }: { name: string; index: number }) {
 	);
 }
 
+// Hub pages beyond the two projects: the governance surface of the hub.
+// Facts mirror VISION.md and decisions O-3..O-8 — check-site.mjs enforces
+// the copy that must not drift.
+const HUB_CARDS = [
+	{
+		kicker: "THE LADDER",
+		title: "Maturity",
+		body: "A CNCF-style ladder — Sandbox, Incubating, Graduated, Archived — so adoption risk is legible at a glance.",
+		to: "/maturity",
+		link: "See the ladder",
+	},
+	{
+		kicker: "DECISIONS",
+		title: "Governance",
+		body: "How decisions get made: architecture decision records for the ecosystem and dated records for the hub itself.",
+		to: "/governance",
+		link: "How decisions work",
+	},
+	{
+		kicker: "TRUST",
+		title: "Security",
+		body: "Private reporting through GitHub Security Advisories, per project, with the policy that coordinates a fix.",
+		to: "/security",
+		link: "Report securely",
+	},
+	{
+		kicker: "CONTRIBUTE",
+		title: "Contributing",
+		body: "The checks every hub pull request runs, what belongs here, and what stays out of scope.",
+		to: "/contributing",
+		link: "Start contributing",
+	},
+	{
+		kicker: "IDENTITY",
+		title: "Brand",
+		body: "The provisional plain-text wordmark, naming rules, and where every xoroh domain points.",
+		to: "/brand",
+		link: "Brand and domains",
+	},
+	{
+		kicker: "REFERENCE",
+		title: "Docs",
+		body: "Product docs stay with their projects: Kern on kern.xoroh.org, Axis in its repository.",
+		to: "/docs",
+		link: "Find the docs",
+	},
+	{
+		kicker: "SINGLE STREAM",
+		title: "News",
+		body: "One stream for releases, governance notes, and security notes — nothing is announced twice.",
+		to: "/news",
+		link: "Read the stream",
+	},
+] as const;
+
 function Home() {
 	return (
 		<div className="mx-auto w-full max-w-7xl px-4 pt-8 sm:px-6 sm:pt-12 lg:px-8">
@@ -270,6 +325,86 @@ function Home() {
 						<ProjectFeature key={name} name={name} index={index} />
 					))}
 				</div>
+			</section>
+
+			<section
+				aria-labelledby="hub-title"
+				className="home-section mt-24 sm:mt-32"
+			>
+				<div className="section-heading">
+					<p className="section-kicker">BEYOND THE PROJECTS</p>
+					<h2 id="hub-title" className="section-title">
+						The hub is a project too.
+					</h2>
+					<p className="mt-3 max-w-2xl text-(length:--sys-typescale-body-large-font-size) leading-(--sys-typescale-body-large-line-height) text-(--sys-color-on-surface-variant)">
+						Governance, maturity, security, and identity are published the same
+						way the code is: in the open, versioned, and reviewable.
+					</p>
+				</div>
+				<ul className="hub-grid mt-9">
+					{HUB_CARDS.map((card) => (
+						<li key={card.to} className="h-full">
+							<Card variant="outlined" className="hub-card h-full">
+								<CardHeader className="gap-2 p-5 pb-0 sm:p-6 sm:pb-0">
+									<p className="text-(length:--sys-typescale-label-large-font-size) font-(--sys-typescale-label-large-font-weight) tracking-[0.12em] text-(--sys-color-primary)">
+										{card.kicker}
+									</p>
+									<h3 className="font-(--sys-typescale-title-large-font-weight) text-(length:--sys-typescale-title-large-font-size) text-(--sys-color-on-surface)">
+										{card.title}
+									</h3>
+								</CardHeader>
+								<CardContent className="p-5 pt-3 sm:p-6 sm:pt-3">
+									<p className="text-(length:--sys-typescale-body-medium-font-size) leading-(--sys-typescale-body-medium-line-height) text-(--sys-color-on-surface-variant)">
+										{card.body}
+									</p>
+								</CardContent>
+								<CardActions className="mt-auto justify-start px-5 pb-5 sm:px-6">
+									<Button variant="ghost" href={card.to}>
+										{card.link}
+									</Button>
+								</CardActions>
+							</Card>
+						</li>
+					))}
+					<li className="h-full sm:col-span-2 lg:col-span-2">
+						<Card variant="filled" className="hub-card hub-contact h-full">
+							<CardHeader className="gap-2 p-5 pb-0 sm:p-6 sm:pb-0">
+								<p className="text-(length:--sys-typescale-label-large-font-size) font-(--sys-typescale-label-large-font-weight) tracking-[0.12em] text-(--sys-color-primary)">
+									TALK TO THE OWNERS
+								</p>
+								<h3 className="font-(--sys-typescale-title-large-font-weight) text-(length:--sys-typescale-title-large-font-size) text-(--sys-color-on-surface)">
+									Contact
+								</h3>
+								<p className="max-w-prose text-(length:--sys-typescale-body-medium-font-size) leading-(--sys-typescale-body-medium-line-height) text-(--sys-color-on-surface-variant)">
+									Questions, proposals, and conduct reports reach the hub owners
+									directly. Bugs and ideas are public work; conduct matters are
+									not.
+								</p>
+							</CardHeader>
+							<CardContent className="grid gap-3 p-5 pt-4 sm:grid-cols-3 sm:p-6 sm:pt-4">
+								<a
+									href="https://github.com/xoroh/xoroh/issues"
+									className="hub-contact-link"
+								>
+									<span className="hub-contact-label">Bugs and ideas</span>
+									<span className="hub-contact-detail">
+										GitHub issues, in the open
+									</span>
+								</a>
+								<a href="mailto:conduct@xoroh.org" className="hub-contact-link">
+									<span className="hub-contact-label">Code of conduct</span>
+									<span className="hub-contact-detail">
+										conduct@xoroh.org, private
+									</span>
+								</a>
+								<a href="https://github.com/xoroh" className="hub-contact-link">
+									<span className="hub-contact-label">The organization</span>
+									<span className="hub-contact-detail">github.com/xoroh</span>
+								</a>
+							</CardContent>
+						</Card>
+					</li>
+				</ul>
 			</section>
 		</div>
 	);

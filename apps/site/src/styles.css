@@ -120,6 +120,77 @@ body {
 	color: var(--sys-color-on-surface);
 }
 
+.hub-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+	.hub-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1024px) {
+	.hub-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+.hub-card {
+	display: flex;
+	flex-direction: column;
+	border-radius: 1.5rem;
+	transition: transform 280ms var(--sys-motion-easing-emphasized),
+		border-color 200ms ease, box-shadow 280ms ease;
+}
+
+.hub-card:hover {
+	transform: translateY(-3px);
+	border-color: color-mix(in srgb, var(--sys-color-primary) 42%, transparent);
+	box-shadow: var(--sys-elevation-level2);
+}
+
+.hub-contact {
+	background: var(--sys-color-surface-container-low);
+}
+
+.hub-contact:hover {
+	border-color: var(--sys-color-outline-variant);
+}
+
+.hub-contact-link {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.15rem;
+	min-height: 4.25rem;
+	padding: 0.85rem 1rem;
+	border-radius: var(--sys-shape-corner-medium);
+	background: var(--sys-color-surface-container-lowest);
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	transition: background-color 180ms ease, outline-color 180ms ease;
+}
+
+.hub-contact-link:hover {
+	background: var(--sys-color-surface-container);
+	outline-color: color-mix(in srgb, var(--sys-color-primary) 45%, transparent);
+}
+
+.hub-contact-label {
+	font-size: var(--sys-typescale-label-large-font-size);
+	font-weight: var(--sys-typescale-label-large-font-weight);
+	color: var(--sys-color-on-surface);
+}
+
+.hub-contact-detail {
+	font-size: var(--sys-typescale-body-small-font-size);
+	line-height: var(--sys-typescale-body-small-line-height);
+	color: var(--sys-color-on-surface-variant);
+}
+
 .hero-surface {
 	background:
 		radial-gradient(ellipse at 78% 20%, color-mix(in srgb, var(--sys-color-tertiary-container) 78%, transparent), transparent 44%),

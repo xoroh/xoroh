@@ -66,6 +66,9 @@ for (const snippet of [
 	"Get started with Kern",
 	"Explore Axis",
 	"https://xoroh.com",
+	"The hub is a project too.",
+	"conduct@xoroh.org",
+	"GitHub issues, in the open",
 ]) {
 	check(
 		index.includes(snippet),
