@@ -36,6 +36,28 @@ const GROUPS = [
 			{ to: "/brand", label: "Brand" },
 		],
 	},
+	{
+		heading: "Network",
+		links: [
+			{
+				href: "https://xoroh.com",
+				label: "xoroh.com",
+				detail: "Commercial SaaS",
+			},
+			{
+				href: "https://xoroh.org",
+				label: "xoroh.org",
+				detail: "Open-source hub",
+			},
+			{
+				href: "https://kern.xoroh.org",
+				label: "kern.xoroh.org",
+				detail: "Kern site",
+			},
+			{ label: "xoroh.app", detail: "Apps" },
+			{ label: "xoroh.dev", detail: "On hold" },
+		],
+	},
 ] as const;
 
 const footerLinkClass =
@@ -44,7 +66,7 @@ const footerLinkClass =
 export function SiteFooter() {
 	return (
 		<footer className="mt-16 border-t border-(--sys-color-outline-variant) bg-(--sys-color-surface-container-lowest)">
-			<div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+			<div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr] lg:px-8">
 				<div>
 					<p className="text-(length:--sys-typescale-title-large-font-size) leading-(--sys-typescale-title-large-line-height) font-(--sys-typescale-title-large-font-weight) text-(--sys-color-on-surface)">
 						Xoroh
@@ -77,10 +99,31 @@ export function SiteFooter() {
 						</h2>
 						<ul className="mt-2">
 							{group.links.map((item) => (
-								<li key={item.to}>
-									<Link to={item.to} className={footerLinkClass}>
-										{item.label}
-									</Link>
+								<li key={"to" in item ? item.to : item.label}>
+									{"to" in item ? (
+										<Link to={item.to} className={footerLinkClass}>
+											{item.label}
+										</Link>
+									) : "href" in item ? (
+										<a
+											href={item.href}
+											className={`${footerLinkClass} flex-col items-start justify-center leading-tight`}
+										>
+											<span className="block">{item.label}</span>
+											<span className="block text-(length:--sys-typescale-body-small-font-size) text-(--sys-color-on-surface-variant)">
+												{item.detail}
+											</span>
+										</a>
+									) : (
+										<span
+											className={`${footerLinkClass} cursor-default flex-col items-start justify-center leading-tight`}
+										>
+											<span className="block">{item.label}</span>
+											<span className="block text-(length:--sys-typescale-body-small-font-size) text-(--sys-color-on-surface-variant)">
+												{item.detail}
+											</span>
+										</span>
+									)}
 								</li>
 							))}
 						</ul>

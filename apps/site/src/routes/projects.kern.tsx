@@ -21,29 +21,39 @@ export const Route = createFileRoute("/projects/kern")({
 function Kern() {
 	const project = projectByName("kern");
 	return (
-		<div className="mx-auto w-full max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
-			<PageHeader
-				kicker="Projects · Design-system platform"
-				title="Kern"
-				lede={
-					<>
-						One foundation. Every design system. {project.purpose} Material
-						Design 3 is its first system.
-					</>
-				}
-				actions={
-					<>
-						<MaturityBadge stage={targetMaturity.kern} />
-						<span className="text-(length:--sys-typescale-body-medium-font-size) text-(--sys-color-on-surface-variant)">
-							Status: {project.status}. License: {project.license}.
-						</span>
-					</>
-				}
-			/>
+		<div className="project-detail mx-auto w-full max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+			<div className="project-detail-hero project-detail-kern">
+				<PageHeader
+					kicker="Projects · Design-system platform"
+					title="Kern"
+					lede={
+						<>
+							One foundation. Every design system. {project.purpose} Material
+							Design 3 is its first system.
+						</>
+					}
+					actions={
+						<>
+							<MaturityBadge stage={targetMaturity.kern} />
+							<span className="text-(length:--sys-typescale-body-medium-font-size) text-(--sys-color-on-surface-variant)">
+								Status: {project.status}. License: {project.license}.
+							</span>
+						</>
+					}
+				/>
+				<div className="project-detail-art" aria-hidden="true">
+					<span>K</span>
+					<small>
+						DESIGN SYSTEMS
+						<br />
+						BUILT TO BELONG
+					</small>
+				</div>
+			</div>
 
-			<div className="mt-8 grid gap-4 lg:grid-cols-2">
+			<div className="project-detail-panels mt-8 grid gap-4 lg:grid-cols-2">
 				<section id="install" aria-labelledby="install-title">
-					<Card variant="outlined" className="h-full">
+					<Card variant="outlined" className="project-detail-panel">
 						<CardHeader>
 							<h2
 								id="install-title"
@@ -72,7 +82,7 @@ function Kern() {
 				</section>
 
 				<section id="kern-packages" aria-labelledby="kern-packages-title">
-					<Card variant="outlined" className="h-full">
+					<Card variant="outlined" className="project-detail-panel">
 						<CardHeader>
 							<h2
 								id="kern-packages-title"
@@ -111,7 +121,7 @@ function Kern() {
 				aria-labelledby="kern-facts-title"
 				className="mt-4"
 			>
-				<Card variant="outlined">
+				<Card variant="outlined" className="project-detail-facts">
 					<CardHeader>
 						<h2
 							id="kern-facts-title"
@@ -121,7 +131,7 @@ function Kern() {
 						</h2>
 					</CardHeader>
 					<CardContent>
-						<dl className="hub-prose grid gap-4 sm:grid-cols-2">
+						<dl className="hub-prose project-facts-grid grid gap-4 sm:grid-cols-2">
 							<div>
 								<dt className="text-(length:--sys-typescale-label-large-font-size) font-(--sys-typescale-label-large-font-weight) text-(--sys-color-on-surface)">
 									Repository

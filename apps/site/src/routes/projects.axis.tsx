@@ -21,30 +21,40 @@ export const Route = createFileRoute("/projects/axis")({
 function Axis() {
 	const project = projectByName("axis");
 	return (
-		<div className="mx-auto w-full max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
-			<PageHeader
-				kicker="Projects · Native primitives"
-				title="Axis"
-				lede={
-					<>
-						Unstyled, accessible behavior primitives for native — the
-						counterpart of Base UI for React Native. Usable with or without
-						Kern: Axis never depends on Kern.
-					</>
-				}
-				actions={
-					<>
-						<MaturityBadge stage={targetMaturity.axis} />
-						<span className="text-(length:--sys-typescale-body-medium-font-size) text-(--sys-color-on-surface-variant)">
-							Status: {project.status}. License: {project.license}.
-						</span>
-					</>
-				}
-			/>
+		<div className="project-detail mx-auto w-full max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+			<div className="project-detail-hero project-detail-axis">
+				<PageHeader
+					kicker="Projects · Native primitives"
+					title="Axis"
+					lede={
+						<>
+							Unstyled, accessible behavior primitives for native — the
+							counterpart of Base UI for React Native. Usable with or without
+							Kern: Axis never depends on Kern.
+						</>
+					}
+					actions={
+						<>
+							<MaturityBadge stage={targetMaturity.axis} />
+							<span className="text-(length:--sys-typescale-body-medium-font-size) text-(--sys-color-on-surface-variant)">
+								Status: {project.status}. License: {project.license}.
+							</span>
+						</>
+					}
+				/>
+				<div className="project-detail-art" aria-hidden="true">
+					<span>A</span>
+					<small>
+						BEHAVIOR
+						<br />
+						WITHOUT OPINION
+					</small>
+				</div>
+			</div>
 
-			<div className="mt-8 grid gap-4 lg:grid-cols-2">
+			<div className="project-detail-panels mt-8 grid gap-4 lg:grid-cols-2">
 				<section id="install" aria-labelledby="install-title">
-					<Card variant="outlined" className="h-full">
+					<Card variant="outlined" className="project-detail-panel">
 						<CardHeader>
 							<h2
 								id="install-title"
@@ -75,7 +85,7 @@ function Axis() {
 				</section>
 
 				<section id="axis-packages" aria-labelledby="axis-packages-title">
-					<Card variant="outlined" className="h-full">
+					<Card variant="outlined" className="project-detail-panel">
 						<CardHeader>
 							<h2
 								id="axis-packages-title"
@@ -114,7 +124,7 @@ function Axis() {
 				aria-labelledby="axis-facts-title"
 				className="mt-4"
 			>
-				<Card variant="outlined">
+				<Card variant="outlined" className="project-detail-facts">
 					<CardHeader>
 						<h2
 							id="axis-facts-title"
@@ -124,7 +134,7 @@ function Axis() {
 						</h2>
 					</CardHeader>
 					<CardContent>
-						<dl className="hub-prose grid gap-4 sm:grid-cols-2">
+						<dl className="hub-prose project-facts-grid grid gap-4 sm:grid-cols-2">
 							<div>
 								<dt className="text-(length:--sys-typescale-label-large-font-size) font-(--sys-typescale-label-large-font-weight) text-(--sys-color-on-surface)">
 									Repository
