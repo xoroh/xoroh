@@ -27,6 +27,7 @@ function copySearchIndex() {
 // Start + Tailwind v4 on Cloudflare Workers via wrangler. The hub needs no
 // react-native-web alias — unlike Kern it renders no native previews.
 const config = defineConfig({
+	build: { manifest: true, sourcemap: process.env.BUNDLE_MAP === "1" },
 	plugins: [
 		cloudflare({ viteEnvironment: { name: "ssr" } }),
 		tailwindcss(),
