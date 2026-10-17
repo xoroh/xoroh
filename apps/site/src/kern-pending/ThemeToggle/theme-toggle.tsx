@@ -14,8 +14,8 @@
 // `useKernTheme`, and add the component test + docs entry per Kern's
 // component checklist. Needs a sun/moon glyph decision from Kern's icon
 // set (`@xoroh/kern-icons`) instead of the inline SVGs below.
-import { IconButton } from "../kern/icon-button";
-import { useColorScheme } from "./use-color-scheme";
+import { IconButton } from "../../kern/icon-button";
+import { useColorScheme } from "../UseColorScheme/use-color-scheme";
 
 function SunIcon() {
 	return (

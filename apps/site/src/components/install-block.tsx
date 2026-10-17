@@ -23,8 +23,8 @@ export function InstallBlock({ command }: { command: string }) {
 
 	return (
 		<div className="overflow-hidden rounded-(--sys-shape-corner-large) bg-(--sys-color-surface-container-high) ring-1 ring-(--sys-color-outline-variant)">
-			<div className="flex items-center gap-2 overflow-x-auto p-4">
-				<pre className="min-w-0 flex-1 overflow-x-auto text-(length:--sys-typescale-body-medium-font-size) leading-(--sys-typescale-body-medium-line-height) text-(--sys-color-on-surface)">
+			<div className="flex items-center gap-2 p-4">
+				<pre className="min-w-0 flex-1 max-w-full overflow-hidden whitespace-pre-wrap break-words rounded-(--sys-shape-corner-small) text-(length:--sys-typescale-body-medium-font-size) leading-(--sys-typescale-body-medium-line-height) text-(--sys-color-on-surface)">
 					<code>{command}</code>
 				</pre>
 				<button

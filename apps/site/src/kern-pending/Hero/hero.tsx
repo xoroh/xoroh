@@ -19,7 +19,7 @@
 // (stack at <600px, art hidden or stacked per host), and record the
 // no-hero-spec-foundation-only rationale in the component docs.
 import type { ReactNode } from "react";
-import { cn } from "../kern/cn";
+import { cn } from "../../kern/cn";
 
 export function Hero({
 	eyebrow,

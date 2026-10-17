@@ -278,13 +278,19 @@ for (const snippet of [
 	check(shell.includes(snippet), `__root__.tsx: missing ${snippet}`);
 }
 const topbar = norm(
-	readFileSync(join(site, "src", "kern-pending", "top-bar.tsx"), "utf8"),
+	readFileSync(
+		join(site, "src", "kern-pending", "TopBar", "top-bar.tsx"),
+		"utf8",
+	),
 );
 for (const snippet of ["<header", "<nav", 'aria-label="Primary"']) {
 	check(topbar.includes(snippet), `top-bar.tsx: missing ${snippet}`);
 }
 const footer = norm(
-	readFileSync(join(site, "src", "kern-pending", "site-footer.tsx"), "utf8"),
+	readFileSync(
+		join(site, "src", "kern-pending", "SiteFooter", "site-footer.tsx"),
+		"utf8",
+	),
 );
 for (const snippet of ["<footer", "<nav"]) {
 	check(footer.includes(snippet), `site-footer.tsx: missing ${snippet}`);
@@ -323,9 +329,10 @@ const ownDirs = ["routes", "components", "kern-pending"].map((d) =>
 	join(site, "src", d),
 );
 for (const dir of ownDirs) {
-	for (const file of readdirSync(dir)) {
-		if (!/\.(tsx?|css)$/.test(file)) continue;
-		const text = readFileSync(join(dir, file), "utf8");
+	for (const file of readdirSync(dir, { recursive: true })) {
+		const path = join(dir, String(file));
+		if (!/\.(tsx?|css)$/.test(String(file))) continue;
+		const text = readFileSync(path, "utf8");
 		check(!text.includes("/home/"), `${file}: must not reference host paths`);
 		check(
 			!text.includes("xoroh-monorepo/kern"),

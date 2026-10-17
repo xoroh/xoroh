@@ -6,7 +6,7 @@ import { featuredProjects, projectByName } from "../data/projects";
 import { Button } from "../kern/button";
 import { Card, CardActions, CardContent, CardHeader } from "../kern/card";
 import { Chip } from "../kern/chip";
-import { Hero } from "../kern-pending/hero";
+import { Hero } from "../kern-pending/Hero/hero";
 
 export const Route = createFileRoute("/")({
 	head: () =>
@@ -178,13 +178,25 @@ function Home() {
 							</p>
 						</CardContent>
 						<CardActions>
-							<Button variant="ghost" href="/projects/kern">
+							<Button
+								variant="ghost"
+								href="/projects/kern"
+								className="text-(--sys-color-on-surface)"
+							>
 								Kern details
 							</Button>
-							<Button variant="ghost" href="https://kern.xoroh.org">
+							<Button
+								variant="ghost"
+								href="https://kern.xoroh.org"
+								className="text-(--sys-color-on-surface)"
+							>
 								Kern docs
 							</Button>
-							<Button variant="ghost" href="https://github.com/xoroh/kern">
+							<Button
+								variant="ghost"
+								href="https://github.com/xoroh/kern"
+								className="text-(--sys-color-on-surface)"
+							>
 								Kern repo
 							</Button>
 						</CardActions>
@@ -215,16 +227,25 @@ function Home() {
 							</div>
 						</CardContent>
 						<CardActions>
-							<Button variant="ghost" href="/projects/axis">
+							<Button
+								variant="ghost"
+								href="/projects/axis"
+								className="text-(--sys-color-on-surface)"
+							>
 								Axis details
 							</Button>
 							<Button
 								variant="ghost"
 								href="https://github.com/xoroh/axis/tree/main/docs"
+								className="text-(--sys-color-on-surface)"
 							>
 								Axis docs
 							</Button>
-							<Button variant="ghost" href="https://github.com/xoroh/axis">
+							<Button
+								variant="ghost"
+								href="https://github.com/xoroh/axis"
+								className="text-(--sys-color-on-surface)"
+							>
 								Axis repo
 							</Button>
 						</CardActions>
@@ -306,10 +327,15 @@ function Home() {
 								<Button
 									variant="ghost"
 									href="https://github.com/xoroh/xoroh/issues"
+									className="text-(--sys-color-on-surface)"
 								>
 									Issues
 								</Button>
-								<Button variant="ghost" href="mailto:conduct@xoroh.org">
+								<Button
+									variant="ghost"
+									href="mailto:conduct@xoroh.org"
+									className="text-(--sys-color-on-surface)"
+								>
 									conduct@xoroh.org
 								</Button>
 							</CardActions>

@@ -170,6 +170,19 @@ describe("registry-driven project pages", () => {
 		expect(raw.includes("kern-material-3")).toBe(false);
 	});
 
+	test("Axis docs and default branch use main", () => {
+		const registry = readRegistry();
+		const axis = registry.projects.find(
+			(project: { name: string }) => project.name === "axis",
+		);
+		expect(axis.default_branch).toBe("main");
+		expect(
+			read(join(site, "src", "data", "projects.ts")).includes(
+				"https://github.com/xoroh/axis/tree/main/docs",
+			),
+		).toBe(true);
+	});
+
 	test("project routes render from the registry data module", () => {
 		for (const file of [
 			routeForPath["/projects"],
@@ -231,10 +244,14 @@ describe("shell landmarks and feed files", () => {
 		]) {
 			expect(shell.includes(s)).toBe(true);
 		}
-		const topbar = read(join(site, "src", "kern-pending", "top-bar.tsx"));
+		const topbar = read(
+			join(site, "src", "kern-pending", "TopBar", "top-bar.tsx"),
+		);
 		expect(topbar.includes("<header")).toBe(true);
 		expect(topbar.includes("<nav")).toBe(true);
-		const footer = read(join(site, "src", "kern-pending", "site-footer.tsx"));
+		const footer = read(
+			join(site, "src", "kern-pending", "SiteFooter", "site-footer.tsx"),
+		);
 		expect(footer.includes("<footer")).toBe(true);
 	});
 

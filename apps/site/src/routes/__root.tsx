@@ -4,9 +4,9 @@ import {
 	Link,
 	Scripts,
 } from "@tanstack/react-router";
-import { SiteFooter } from "../kern-pending/site-footer";
-import { TopBar } from "../kern-pending/top-bar";
-import { COLOR_SCHEME_INIT } from "../kern-pending/use-color-scheme";
+import { SiteFooter } from "../kern-pending/SiteFooter/site-footer";
+import { TopBar } from "../kern-pending/TopBar/top-bar";
+import { COLOR_SCHEME_INIT } from "../kern-pending/UseColorScheme/use-color-scheme";
 import appCss from "../styles.css?url";
 
 const SITE_DESCRIPTION =

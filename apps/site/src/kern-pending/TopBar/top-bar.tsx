@@ -21,8 +21,8 @@
 // and add responsive + a11y (aria-current, disclosure, focus) tests.
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { cn } from "../kern/cn";
-import { ThemeToggle } from "./theme-toggle";
+import { cn } from "../../kern/cn";
+import { ThemeToggle } from "../ThemeToggle/theme-toggle";
 
 const NAV_ITEMS = [
 	{ to: "/projects", label: "Projects" },

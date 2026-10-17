@@ -51,7 +51,7 @@
       "name": "axis",
       "purpose": "Design-system-neutral native-mobile behavior and accessibility primitives.",
       "canonical_repo": "https://github.com/xoroh/axis",
-      "default_branch": "development",
+      "default_branch": "main",
       "status": "scaffold",
       "maturity": "tbd-owner-input",
       "maintainers": "tbd-owner-input",
