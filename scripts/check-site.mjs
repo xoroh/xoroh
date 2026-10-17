@@ -19,7 +19,7 @@ const norm = (s) => String(s).replace(/\s+/g, " ");
 
 const routeFiles = {
 	"/": "index.tsx",
-	"/projects": "projects.tsx",
+	"/projects": "projects.index.tsx",
 	"/projects/kern": "projects.kern.tsx",
 	"/projects/axis": "projects.axis.tsx",
 	"/maturity": "maturity.tsx",
@@ -60,7 +60,7 @@ for (const [name, text] of Object.entries(sources)) {
 }
 
 // Required home copy (VISION + O-1..O-8).
-for (const s of [
+for (const snippet of [
 	"One foundation. Every design system.",
 	"https://kern.xoroh.org",
 	"https://github.com/xoroh/axis",
@@ -76,12 +76,19 @@ for (const s of [
 	"provisional plain-text wordmark",
 	'to="/news"',
 ]) {
-	check(index.includes(s), `index.tsx: missing required copy: ${s}`);
+	check(
+		index.includes(snippet),
+		`index.tsx: missing required copy: ${snippet}`,
+	);
 }
 
 // New IA pages carry their decided copy.
 const requiredByRoute = {
-	"projects.tsx": ["projects.json", '"/projects/kern"', '"/projects/axis"'],
+	"projects.index.tsx": [
+		"projects.json",
+		'"/projects/kern"',
+		'"/projects/axis"',
+	],
 	"projects.kern.tsx": [
 		"One foundation. Every design system.",
 		"Available at release",
@@ -102,26 +109,29 @@ const requiredByRoute = {
 	"docs.tsx": ["kern.xoroh.org", "axis repo docs tree", "search-index.json"],
 };
 for (const [name, snippets] of Object.entries(requiredByRoute)) {
-	for (const s of snippets) {
+	for (const snippet of snippets) {
 		check(
-			(sources[name] ?? "").includes(s),
-			`${name}: missing required copy: ${s}`,
+			(sources[name] ?? "").includes(snippet),
+			`${name}: missing required copy: ${snippet}`,
 		);
 	}
 }
 
-// Every route declares its canonical link.
-for (const [path, name] of Object.entries(routeFiles)) {
-	const canonical = `https://xoroh.org${path === "/" ? "/" : path}`;
+// Canonicals are centralized in seo.ts: routes must not hardcode their own.
+for (const [, name] of Object.entries(routeFiles)) {
 	check(
-		(sources[name] ?? "").includes(canonical),
-		`${name}: missing canonical link ${canonical}`,
+		!(sources[name] ?? "").includes('rel: "canonical"'),
+		`${name}: canonicals come from pageHead, not the route`,
 	);
 }
 
 // Project pages are driven by the registry: detail routes import the data
 // module, and the registry uses the decided kern-m3 name.
-for (const name of ["projects.tsx", "projects.kern.tsx", "projects.axis.tsx"]) {
+for (const name of [
+	"projects.index.tsx",
+	"projects.kern.tsx",
+	"projects.axis.tsx",
+]) {
 	check(
 		(sources[name] ?? "").includes("#/data/projects"),
 		`${name}: must render from the registry data module`,
@@ -139,7 +149,7 @@ for (const name of ["kern", "axis"]) {
 }
 
 // llms.txt maps the full IA.
-for (const s of [
+for (const snippet of [
 	"https://xoroh.org/projects",
 	"https://xoroh.org/projects/kern",
 	"https://xoroh.org/projects/axis",
@@ -153,7 +163,7 @@ for (const s of [
 	"projects.json",
 	"Available at release (0.1.0)",
 ]) {
-	check(llms.includes(s), `llms.txt: missing required entry: ${s}`);
+	check(llms.includes(snippet), `llms.txt: missing required entry: ${snippet}`);
 }
 
 // Search index: entries resolve to real routes and in-page anchors.
@@ -199,6 +209,129 @@ for (const path of Object.keys(routeForPath)) {
 		),
 		`search-index.json: no entry for route ${path}`,
 	);
+}
+
+// Redesign: every route builds its head through the shared helper, so
+// each page gets one title + description + OG/Twitter set + canonical.
+for (const [, name] of Object.entries(routeFiles)) {
+	const source = sources[name] ?? "";
+	const uses = source.split("pageHead({").length - 1;
+	check(uses === 1, `${name}: must call pageHead exactly once (has ${uses})`);
+}
+const titles = new Set();
+for (const [path, name] of Object.entries(routeFiles)) {
+	const source = sources[name] ?? "";
+	const title = /title:\s*"([^"]+)"/.exec(source)?.[1];
+	const desc = /description:\s*"([^"]+)"/.exec(source)?.[1];
+	check(!!title && title.length > 10, `${name}: needs a unique title`);
+	check(!!desc && desc.length > 20, `${name}: needs a unique description`);
+	if (title) {
+		check(!titles.has(title), `${name}: duplicate title ${title}`);
+		titles.add(title);
+	}
+	check(
+		source.includes(`path: "${path}"`) ||
+			(path === "/" && source.includes('path: "/"')),
+		`${name}: pageHead path must be ${path}`,
+	);
+}
+const seo = norm(
+	readFileSync(join(site, "src", "components", "seo.ts"), "utf8"),
+);
+for (const tag of [
+	'rel: "canonical"',
+	"og:title",
+	"og:description",
+	"og:url",
+	"og:type",
+	"og:site_name",
+	"twitter:card",
+	"twitter:title",
+	"twitter:description",
+]) {
+	check(seo.includes(tag), `seo.ts: missing ${tag}`);
+}
+check(
+	(seo.match(/rel: "canonical"/g) ?? []).length === 1,
+	"seo.ts: must emit exactly one canonical",
+);
+
+// Redesign: the pathless projects layout carries no head, so detail pages
+// cannot inherit a second canonical.
+const layout = norm(readFileSync(join(routes, "projects.route.tsx"), "utf8"));
+check(!layout.includes("pageHead"), "projects.route.tsx: must not set a head");
+check(
+	!layout.includes('rel: "canonical"'),
+	"projects.route.tsx: must not set a canonical",
+);
+
+// Redesign: shell landmarks, skip link, and theme init live in __root__.
+const shell = norm(readFileSync(join(routes, "__root.tsx"), "utf8"));
+for (const snippet of [
+	'href="#main-content"',
+	"skip-link",
+	'main id="main-content"',
+	"<TopBar",
+	"<SiteFooter",
+	"COLOR_SCHEME_INIT",
+]) {
+	check(shell.includes(snippet), `__root__.tsx: missing ${snippet}`);
+}
+const topbar = norm(
+	readFileSync(join(site, "src", "kern-pending", "top-bar.tsx"), "utf8"),
+);
+for (const snippet of ["<header", "<nav", 'aria-label="Primary"']) {
+	check(topbar.includes(snippet), `top-bar.tsx: missing ${snippet}`);
+}
+const footer = norm(
+	readFileSync(join(site, "src", "kern-pending", "site-footer.tsx"), "utf8"),
+);
+for (const snippet of ["<footer", "<nav"]) {
+	check(footer.includes(snippet), `site-footer.tsx: missing ${snippet}`);
+}
+
+// Redesign: robots.txt + sitemap.xml cover the full IA.
+check(
+	existsSync(join(site, "public", "robots.txt")),
+	"public/robots.txt missing",
+);
+check(
+	existsSync(join(site, "public", "sitemap.xml")),
+	"public/sitemap.xml missing",
+);
+const robots = norm(readFileSync(join(site, "public", "robots.txt"), "utf8"));
+check(robots.includes("Allow: /"), "robots.txt: must allow /");
+check(
+	robots.includes("https://xoroh.org/sitemap.xml"),
+	"robots.txt: must point at the apex sitemap",
+);
+const sitemap = norm(readFileSync(join(site, "public", "sitemap.xml"), "utf8"));
+for (const path of Object.keys(routeFiles)) {
+	check(
+		sitemap.includes(
+			`<loc>https://xoroh.org${path === "/" ? "/" : path}</loc>`,
+		),
+		`sitemap.xml: missing ${path}`,
+	);
+}
+
+// Redesign: hermetic build — route, component, and pattern sources must not
+// reach outside the repo (the sibling kern checkout is vendored, not linked).
+import { readdirSync } from "node:fs";
+
+const ownDirs = ["routes", "components", "kern-pending"].map((d) =>
+	join(site, "src", d),
+);
+for (const dir of ownDirs) {
+	for (const file of readdirSync(dir)) {
+		if (!/\.(tsx?|css)$/.test(file)) continue;
+		const text = readFileSync(join(dir, file), "utf8");
+		check(!text.includes("/home/"), `${file}: must not reference host paths`);
+		check(
+			!text.includes("xoroh-monorepo/kern"),
+			`${file}: import from the vendored kern copy, not the sibling checkout`,
+		);
+	}
 }
 
 if (errors.length > 0) {
