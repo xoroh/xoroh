@@ -59,22 +59,13 @@ for (const [name, text] of Object.entries(sources)) {
 	check(!text.includes("®"), `${name}: no trademark symbols (O-8)`);
 }
 
-// Required home copy (VISION + O-1..O-8).
+// Required homepage copy (VISION + O-1..O-8).
 for (const snippet of [
 	"One foundation. Every design system.",
-	"https://kern.xoroh.org",
-	"https://github.com/xoroh/axis",
-	"Available at release",
-	"@xoroh/kern-m3",
-	"Axis never depends on Kern",
-	"Target maturity at 0.1.0: Incubating",
-	"Target maturity at 0.1.0: Sandbox",
-	"conduct@xoroh.org",
+	"Kern gives teams a durable",
+	"Get started with Kern",
+	"Explore Axis",
 	"https://xoroh.com",
-	"xoroh.app",
-	"xoroh.dev",
-	"provisional plain-text wordmark",
-	'to="/news"',
 ]) {
 	check(
 		index.includes(snippet),
@@ -94,12 +85,14 @@ const requiredByRoute = {
 		"Available at release",
 		"@xoroh/kern-m3",
 		"https://kern.xoroh.org",
+		"Target maturity at 0.1.0",
 	],
 	"projects.axis.tsx": [
 		"Axis never depends on Kern",
 		"Available at release",
 		"@xoroh/axis",
 		"axis repo docs tree",
+		"Target maturity at 0.1.0",
 	],
 	"maturity.tsx": ["Sandbox", "Incubating", "Graduated", "Archived"],
 	"governance.tsx": ["docs/adr", "conduct@xoroh.org"],
@@ -115,6 +108,25 @@ for (const [name, snippets] of Object.entries(requiredByRoute)) {
 			`${name}: missing required copy: ${snippet}`,
 		);
 	}
+}
+
+const footerComponentSource = norm(
+	readFileSync(
+		join(site, "src", "kern-pending", "SiteFooter", "site-footer.tsx"),
+		"utf8",
+	),
+);
+for (const snippet of [
+	"conduct@xoroh.org",
+	"provisional plain-text wordmark",
+	"xoroh.app",
+	"xoroh.dev",
+	'to: "/news"',
+]) {
+	check(
+		footerComponentSource.includes(snippet),
+		`SiteFooter: missing required copy: ${snippet}`,
+	);
 }
 
 // Canonicals are centralized in seo.ts: routes must not hardcode their own.

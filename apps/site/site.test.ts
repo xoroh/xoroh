@@ -152,6 +152,21 @@ describe("hub copy rules", () => {
 	});
 });
 
+describe("home showcase", () => {
+	test("keeps one focused card per project and interactive Kern controls", () => {
+		const source = read(routeForPath["/"]);
+		expect(source.includes("This panel is the showcase")).toBe(false);
+		expect(source.includes('id="hub-pages"')).toBe(false);
+		expect(source.includes("Where things live")).toBe(false);
+		expect(source.includes("ProjectFeature key={name}")).toBe(true);
+		expect(source.includes("<Switch")).toBe(true);
+		expect(source.includes("<Slider")).toBe(true);
+		expect(source.includes("<Chip")).toBe(true);
+		expect(source.includes("setDarkPreview")).toBe(true);
+		expect(source.includes('setTone("rose")')).toBe(true);
+	});
+});
+
 describe("registry-driven project pages", () => {
 	test("registry has kern and axis entries with packages", () => {
 		const registry = readRegistry();

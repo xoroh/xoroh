@@ -19,7 +19,7 @@ export function PageHeader({
 			<p className="text-(length:--sys-typescale-label-large-font-size) leading-(--sys-typescale-label-large-line-height) font-(--sys-typescale-label-large-font-weight) tracking-[0.1px] text-(--sys-color-primary)">
 				{kicker}
 			</p>
-			<h1 className="mt-2 text-[clamp(2rem,4.5vw,2.75rem)] leading-[1.15] font-normal tracking-[0px] [font-family:var(--sys-typescale-headline-large-font-family)] text-(--sys-color-on-surface)">
+			<h1 className="mt-3 text-[clamp(2.25rem,4.45vw,3.5625rem)] leading-[1.05] font-(--sys-typescale-display-small-font-weight) tracking-[-0.045em] [font-family:var(--sys-typescale-display-small-font-family)] text-(--sys-color-on-surface)">
 				{title}
 			</h1>
 			<div className="mt-3 max-w-prose text-(length:--sys-typescale-body-large-font-size) leading-(--sys-typescale-body-large-line-height) text-(--sys-color-on-surface-variant)">

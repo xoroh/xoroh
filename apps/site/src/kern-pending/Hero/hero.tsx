@@ -39,17 +39,19 @@ export function Hero({
 	return (
 		<section
 			aria-labelledby={id ? `${id}-title` : undefined}
-			className="overflow-hidden rounded-[28px] bg-(--sys-color-secondary-container) text-(--sys-color-on-secondary-container)"
+			className="hero-surface relative isolate overflow-hidden rounded-[2rem] text-(--sys-color-on-secondary-container)"
 		>
-			<div className="grid grid-cols-1 gap-8 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12 lg:p-14">
-				<div className="min-w-0">
+			<div aria-hidden="true" className="hero-orbit hero-orbit-one" />
+			<div aria-hidden="true" className="hero-orbit hero-orbit-two" />
+			<div className="relative grid grid-cols-1 gap-10 p-6 sm:p-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-14 lg:p-16">
+				<div className="min-w-0 py-2">
 					<p className="inline-flex items-center rounded-full border border-(--sys-color-outline) px-3 py-1 text-(length:--sys-typescale-label-large-font-size) leading-(--sys-typescale-label-large-line-height) font-(--sys-typescale-label-large-font-weight) tracking-(--sys-typescale-label-large-letter-spacing)">
 						{eyebrow}
 					</p>
 					<h1
 						id={id ? `${id}-title` : undefined}
 						className={cn(
-							"mt-4 text-[clamp(2.25rem,5vw,3.5625rem)] leading-[1.1] font-normal tracking-[-0.25px]",
+							"mt-6 max-w-[15ch] text-[clamp(2.75rem,4.45vw,4rem)] leading-[0.98] font-semibold tracking-[-0.055em]",
 							"[font-family:var(--sys-typescale-display-large-font-family)]",
 						)}
 					>
