@@ -8,18 +8,13 @@
 		},
 		{
 			"title": "Kern",
-			"url": "/#kern",
+			"url": "/projects/kern#install",
 			"keywords": ["kern", "design system", "material design 3", "incubating"]
 		},
 		{
 			"title": "Axis",
-			"url": "/#axis",
+			"url": "/projects/axis#install",
 			"keywords": ["axis", "native", "primitives", "base ui", "sandbox"]
-		},
-		{
-			"title": "Hub pages",
-			"url": "/#hub-pages",
-			"keywords": ["governance", "contributing", "security", "brand", "docs"]
 		},
 		{
 			"title": "Projects",
@@ -99,7 +94,7 @@
 		},
 		{
 			"title": "Where things live",
-			"url": "/#domains",
+			"url": "/brand#domains",
 			"keywords": [
 				"domains",
 				"xoroh.com",
