@@ -23,33 +23,23 @@ function copySearchIndex() {
 	};
 }
 
-// Split the framework out of the app entry. React + TanStack Start/Router
-// are ~95% of the initial payload and change only when the lockfile does;
-// keeping them out of `index` makes the entry a few kB of app shell, lets
-// both chunks cache independently, and lets the browser parse them in
-// parallel instead of one long task on a mobile CPU.
-// Vite 8 bundles with rolldown, so this uses `output.codeSplitting.groups`.
-// The legacy rollup `manualChunks` option is ignored by rolldown, and the
-// regex form of `test` did not match bun's store layout here, so `test` is
-// a plain predicate over the module id. Both id shapes are handled: bun's
-// store (`node_modules/.bun/<pkg>@<version>/node_modules/<pkg>/…`) and the
-// flat shape (`node_modules/<pkg>/…`).
-const TANSTACK_DEP = /node_modules\/(?:\.bun\/)?@tanstack[+/][^/]+/;
+// Move the shared React runtime into its own stable client chunk. Vite 8
+// uses Rolldown's `output.codeSplitting.groups`; the legacy Rollup
+// `manualChunks` option is ignored. The matcher handles Bun's store and
+// flat node_modules paths.
 const REACT_DEP =
 	/node_modules\/(?:\.bun\/)?(?:react-dom|react|scheduler|use-sync-external-store)(?:@[^/]*|\/)/;
 
 function vendorGroup(id: string): string | null {
 	const path = id.replace(/\\/g, "/");
-	if (!path.includes("node_modules")) return null;
-	if (TANSTACK_DEP.test(path)) return "vendor-tanstack";
-	if (REACT_DEP.test(path)) return "vendor-react";
-	return null;
+	return path.includes("node_modules") && REACT_DEP.test(path)
+		? "vendor-react"
+		: null;
 }
 
 const CLIENT_VENDOR_CHUNKS = [
 	{
 		name: vendorGroup,
-		debugName: "vendor-chunks",
 		test: (id: string) => vendorGroup(id) !== null,
 		priority: 10,
 	},
