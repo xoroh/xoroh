@@ -11,7 +11,7 @@
       "maintainers": "tbd-owner-input",
       "license": "MIT",
       "runtimes": ["bun >=1.4.2"],
-      "platforms": ["web (static site)"],
+      "platforms": ["repository (docs, standards, templates; no runtime artifact)"],
       "packages": [],
       "docs_url": "https://github.com/xoroh/xoroh/tree/main/docs",
       "support_url": "https://github.com/xoroh/xoroh/issues",
