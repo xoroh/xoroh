@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible problem with the site or repository
+description: Report a reproducible problem with the repository
 title: "[Bug]: "
 labels: [bug]
 body:

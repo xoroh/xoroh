@@ -26,12 +26,9 @@ jobs:
       - name: Install
         run: bun install --frozen-lockfile
 
-      - name: Verify hub scaffold
+      - name: Verify repository files
         run: |
           test -f package.json
-          test -f apps/site/package.json
-          test -f apps/site/index.html
-          test -f apps/site/styles.css
           test -f LICENSE
           test -f README.md
 

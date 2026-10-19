@@ -10,7 +10,15 @@ Requirements: Bun 1.4.2 or newer.
 bun install --frozen-lockfile
 ```
 
-The current site is a starter scaffold and does not yet define test or build scripts. Pull requests run the repository's CI workflow, which checks the workspace install and required site files. Add focused tests and update this guide as project scripts are introduced.
+Run the repository checks before opening a pull request:
+
+```sh
+bun run check:index
+bun run check:fixture
+bun run check:scaffold-trial
+```
+
+Pull requests run the same checks in the repository's CI workflow.
 
 ## Pull requests
 
